@@ -1,0 +1,205 @@
+/* GENERAL PAGE STYLE */
+body {
+    background: #0d0d0d;
+    color: #e6e6e6;
+    font-family: "Georgia", serif;
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+/* SIDEBAR */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 180px;
+    padding: 40px 20px;
+    background: #111;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sidebar a {
+    color: #eee;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.sidebar a:hover {
+    color: #e6e6e6;
+}
+
+/* MAIN CONTENT */
+.content {
+    margin-left: 220px;
+    margin-right: 500px;
+    padding: 40px;
+    max-width: 600px;
+    flex: 1;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+}
+
+.sidebar {
+    z-index: 2;
+}
+
+
+/* HEADERS */
+h1 {
+    font-size: 50px;
+    margin-bottom: 12px;
+}
+
+h2 {
+    margin-top: 42px;
+    font-size: 30px;
+}
+
+/* EXPANDABLE SECTIONS */
+details {
+    margin-bottom: 22px;
+    cursor: pointer;
+}
+
+summary {
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+}
+
+details p {
+    margin-top: 12px;
+    color: #ccc;
+}
+
+/* LINKS */
+a {
+    color: #e6e6e6;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+details { margin-bottom: 42px; }
+
+section {
+    margin-bottom: 62px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content {
+    flex: 1;
+}
+
+footer {
+    margin-top: 22px;
+    padding-top: 22px;
+    padding-bottom: 22px;
+    padding-right: 42px; /* <-- add this */
+    color: #555;
+    font-size: 16px;
+    text-align: right;
+    border-top: 1px solid #222;
+}
+
+#clock {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    color: #ccc;
+    font-size: 16px;
+    font-family: monospace;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 6px 10px;
+    border-radius: 6px;
+    z-index: 9999;
+}
+
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 20px;
+        text-align: center;
+        border-right: none;
+        border-bottom: 1px solid #222;
+    }
+    .sidebar a {
+        display: inline-block;
+        margin: 0 10px;
+        font-size: 18px;
+    }
+    .content {
+        margin-left: 0;
+        margin-right: 0;
+        padding: 20px;
+        max-width: 100%;
+    }
+    #clock {
+        top: 10px;
+        right: 10px;
+        font-size: 14px;
+        padding: 4px 8px;
+        z-index: 9999;
+    }
+    footer {
+        padding-right: 20px;
+        text-align: center;
+    }
+    #globe-container,
+    #globeproject-container {
+        display: none;
+    }
+    h1 {
+        font-size: 36px;
+    }
+}
+
+@media (min-width: 1400px) {
+    #globe-container {
+        width: 800px;
+        height: 800px;
+        top: 80px;
+        right: 1200px;
+    }
+
+    .content {
+        margin-right: 200px;
+        max-width: 650px;
+    }
+}
+
+
+#globe-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+    opacity: 0.40; /* dim it so text is still readable */
+    pointer-events: none; /* add this -- stops it from blocking clicks */
+}
+
+#globe-container canvas {
+    background: transparent !important;
+}
