@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" type="image/png" href="favicon-16x16.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>College Application Process</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <meta property="og:title" content="Christian Nguyens" />
+    <meta property="og:description" content="Incoming freshman @ WashU trying to break into CS and finance." />
+    <meta property="og:image" content="android-chrome-512x512.png" />
+    <meta property="og:url" content="https://christiannguyens.github.io/cnguyens/" />
+    <meta property="og:type" content="website" />
+</head>
+
+<body>
+
+ <div id="clock"></div>
+
+    <div class="sidebar">
+    <a href="index.html">About Me</a>
+    <a href="projects.html">Projects</a>
+    <a href="resume.html">College Application Process</a>
+    <a href="links.html">Links</a>
+    <a href="people.html">Contact</a>
+    </div>
+
+    <div class="content">
+        <h1>College Application Process</h1>
+<p>
+  These are all of the resources I made when applying to college! I applied to a total of 30 colleges. Feel free to explore and take inspiration each of them.
+</p>
+        <details>
+            <summary><strong>WashU Accepted Profile</strong></summary>
+            <p>This <a href="https://docs.google.com/document/d/1-pgonl9hXzZD6epctwYUNcdYmX_9r4_IkRXXcrefjJ4/edit?usp=sharing" target="_blank">Google Doc</a>
+                is my admissions profile for WashU. I applied ED2, which meant that I had to attend if I got accepted.</p>
+        </details>
+
+        <details>
+            <summary><strong>Application Spreadsheet</strong></summary>
+            <p>This <a href="https://docs.google.com/spreadsheets/d/1iAjZq3FSztMqUshAJ_mAvUuBHVsL2PcsW8P83t99U2M/edit?usp=sharing" target="_blank">Google Sheets</a>
+                was a realtime organizer for the colleges I applied to.</p>
+        </details>
+
+        <details>
+            <summary><strong>Writing Masterkey</strong></summary>
+            <p>This <a href="https://docs.google.com/document/d/1ob5lCvVc8dwa_5Qwg3rsTWG-XFdtLcJquK664s1E-U8/edit?usp=sharing" target="_blank">Google Doc</a>
+                contains all of the essays I had to write. Most of them were written in a few days.</p></p>
+        </details>
+        
+        <details>
+            <summary><strong>Words of Advice</strong></summary>
+            <p>These are some tips I heard that helped me during the application process. Feel free to listen, or not. It's up to you.</p>
+            <p>1. Try to get fee waivers. All 30 of the schools I applied to were free.</p>
+            <p>2. Be niche and yourself. No one likes a basic, run of the mill applicant.</p>
+            <p>3. If you want to get into a top school and only care about its ranking/prestige, consider applying Early Decision.</p>
+            <p>4. Don't limit yourself to a set amount of schools. Apply to as many as you want. You miss 100% of the shots you don't take.</p>
+            <p>5. Have fun! Applying to college gets boring and tedious when you aren't obsessed with the process.
+            </p>
+        </details>
+        <p>
+
+        </p>
+    </div>
+
+<div id="globe-container"></div>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const container = document.getElementById("globe-container");
+const width = window.innerWidth;
+const height = window.innerHeight;
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setSize(width, height);
+renderer.setClearColor(0x000000, 0);
+container.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+camera.position.z = 1.4;
+
+const geometry = new THREE.SphereGeometry(1, 32, 32);
+const material = new THREE.MeshBasicMaterial({ color: 0x3468d1, wireframe: true });
+const globe = new THREE.Mesh(geometry, material);
+scene.add(globe);
+
+function animate() {
+    requestAnimationFrame(animate);
+    globe.rotation.y += 0.003;
+    renderer.render(scene, camera);
+}
+animate();
+</script>
+
+</body>
+<footer>
+    Curated by Christian Nguyens
+</footer>
+
+<script>
+function updateClock() {
+    const options = {
+        timeZone: "America/New_York",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+    };
+
+    const now = new Date().toLocaleTimeString("en-US", options);
+    document.getElementById("clock").textContent = "CLT: " + now;
+}
+
+setInterval(updateClock, 1000);
+updateClock();
+</script>
+
+
+</html>
+
+
+
+
