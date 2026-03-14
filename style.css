@@ -35,9 +35,9 @@ body {
 /* MAIN CONTENT */
 .content {
     margin-left: 220px;
-    margin-right: 500px;
+    margin-right: 300px;
     padding: 40px;
-    max-width: 600px;
+    max-width: 900px;
     flex: 1;
 }
 
