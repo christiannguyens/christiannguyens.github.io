@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" type="image/png" href="favicon-16x16.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>College Application Process</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <meta property="og:title" content="Christian Nguyens" />
+    <meta property="og:description" content="Incoming freshman @ WashU trying to break into CS and finance." />
+    <meta property="og:image" content="android-chrome-512x512.png" />
+    <meta property="og:url" content="https://christiannguyens.github.io/cnguyens/" />
+    <meta property="og:type" content="website" />
+</head>
+
+<body>
+
+ <div id="clock"></div>
+
+    <div class="sidebar">
+    <a href="index.html">About Me</a>
+    <a href="projects.html">Projects</a>
+    <a href="resume.html">College Application Process</a>
+    <a href="links.html">Links</a>
+    <a href="people.html">Contact</a>
+    <a href="washu.html">Future + FAQ</a>
+    </div>
+
+    <div class="content">
+        <h1>what am i doing now? what will my future entail? and questions about that</h1>
+
+        <p><strong>what is your current goal?</strong></p>
+        <p>cruise thru my last semester of high school and graduate with good enough grades.</p>
+        <p><strong><br>i thought washu was in seattle?</strong></p>
+        <p>washU is located in st. louis, missouri (the city with the big arch). it is often mistakened with uw (university of washington) in seattle. they are seperate entities--washU is not a satellite campus.</p>
+        <p><strong><br>why washu?</strong></p>
+        <p>3 things:<br>1. the <a href="https://sites.wustl.edu/businesspluscs/" target="_blank">BUCS program</a>, which combines business and comp sci<br>2. the college emphasizes hardwork and collaboration<br>3. it's a top 20 and 
+        its early/binding decision application gave me the highest boost--the regular acceptance rate is ~10%</p>
+        <p><strong><br>what happened to trying to get into georgia tech?</strong></p>
+        <p>3 things:<br>1. i don't wanna do engineering anymore<br>2. im not getting into any of their STEM
+         majors<br>3. its out of state and public, which meant my financial aid would be abysmal</p>
+         <p><strong><br>why the major switch?</strong></p>
+         <p>i did not like AP physics or science in general (ironic since im doing computer SCIENCE). i was more interested in the systems aspect--making intertwined things more efficient</p>
+         <p><strong><br>what do u want to do in the future?</strong></p>
+         <p>in college, i want to go to hackathons, join clubs, create a startup, and maybe even pursuing research! the ultimate
+         goal is to land internships and a job out of college.</p>
+        <p><strong><br>how are you as a person?</strong></p>
+        <p> i am very introverted, although i do open up around people who share commonalities with me. my mbti is ISTP, and 3 words to describe me are:<br>1. zesty<br>2. curious<br>3. niche</p>
+        <p><strong><br>outside of school, what do you do?</strong></p>
+        <p>i like listening to music (my taste is niche), playing TFT with my friends, doomscrolling instagram and tiktok, and snacking.
+             i live a very boring life, and i hope that washU gives me the opportunity to grow and have fun. i want to live a life beyond a screen</p>
+    </div>
+    </div>
+
+<div id="globe-container"></div>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const container = document.getElementById("globe-container");
+const width = window.innerWidth;
+const height = window.innerHeight;
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setSize(width, height);
+renderer.setClearColor(0x000000, 0);
+container.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+camera.position.z = 1.4;
+
+const geometry = new THREE.SphereGeometry(1, 32, 32);
+const material = new THREE.MeshBasicMaterial({ color: 0xc2444c, wireframe: true });
+const globe = new THREE.Mesh(geometry, material);
+scene.add(globe);
+
+function animate() {
+    requestAnimationFrame(animate);
+    globe.rotation.y += 0.003;
+    renderer.render(scene, camera);
+}
+animate();
+</script>
+
+</body>
+<footer>
+    Made by Christian Nguyens
+</footer>
+
+<script>
+function updateClock() {
+    const options = {
+        timeZone: "America/New_York",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+    };
+
+    const now = new Date().toLocaleTimeString("en-US", options);
+    document.getElementById("clock").textContent = "CLT: " + now;
+}
+
+setInterval(updateClock, 1000);
+updateClock();
+</script>
+
+
+</html>
