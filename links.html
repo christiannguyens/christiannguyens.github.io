@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="favicon-16x16.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Links — Christian Nguyens</title>
+  <meta property="og:title" content="Christian Nguyens" />
+  <meta property="og:description" content="Incoming freshman @ WashU trying to break into CS and finance." />
+  <meta property="og:image" content="android-chrome-512x512.png" />
+  <meta property="og:url" content="https://christiannguyens.github.io/cnguyens/" />
+  <meta property="og:type" content="website" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --fb-blue: #1877f2;
+      --fb-blue-hover: #166fe5;
+      --fb-blue-light: #e7f3ff;
+      --fb-bg: #f0f2f5;
+      --fb-card: #ffffff;
+      --fb-border: #ced0d4;
+      --fb-border-light: #e4e6eb;
+      --text-primary: #050505;
+      --text-secondary: #65676b;
+      --text-tertiary: #8a8d91;
+      --font: 'Nunito', system-ui, sans-serif;
+      --green: #42b72a;
+    }
+
+    html, body { overflow-x: hidden; width: 100%; }
+
+    body {
+      background: var(--fb-bg);
+      color: var(--text-primary);
+      font-family: var(--font);
+      font-size: 15px;
+      line-height: 1.34;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    .topnav {
+      background: var(--fb-card);
+      border-bottom: 1px solid var(--fb-border-light);
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .nav-left { display: flex; align-items: center; gap: 8px; }
+
+    .fb-logo {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--fb-blue);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 22px; font-weight: 900;
+      text-decoration: none; flex-shrink: 0;
+      font-family: var(--font);
+    }
+
+    .nav-search {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--fb-bg); border-radius: 20px;
+      padding: 8px 12px; font-size: 15px;
+      color: var(--text-secondary); width: 200px; cursor: text;
+    }
+
+    .nav-center {
+      display: flex; align-items: center; gap: 4px;
+    }
+
+    .nav-tab {
+      display: flex; align-items: center; justify-content: center;
+      width: 96px; height: 48px;
+      border-radius: 8px; cursor: pointer;
+      transition: background 0.15s;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-bottom: 3px solid transparent;
+    }
+    .nav-tab:hover { background: var(--fb-bg); }
+    .nav-tab.active { color: var(--fb-blue); border-bottom-color: var(--fb-blue); }
+
+    .nav-right { display: flex; align-items: center; gap: 8px; }
+
+    .nav-icon-btn {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--fb-bg); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-primary); font-size: 18px;
+      transition: background 0.15s; text-decoration: none;
+    }
+    .nav-icon-btn:hover { background: var(--fb-border-light); }
+
+    #clock {
+      font-size: 12px; color: var(--text-secondary);
+      font-family: monospace; background: var(--fb-bg);
+      padding: 4px 10px; border-radius: 12px;
+      white-space: nowrap;
+    }
+
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px; border-radius: 6px;
+      background: var(--fb-blue); color: white;
+      font-size: 14px; font-weight: 700;
+      text-decoration: none; transition: background 0.15s;
+      font-family: var(--font);
+    }
+    .back-btn:hover { background: var(--fb-blue-hover); }
+
+    /* PROFILE COVER */
+    .profile-cover-wrap {
+      background: var(--fb-card);
+      border-bottom: 1px solid var(--fb-border-light);
+      margin-bottom: 16px;
+      overflow: visible;
+    }
+
+    .profile-cover {
+      height: 160px;
+      background: linear-gradient(135deg, #1877f2 0%, #42b72a 50%, #f02849 100%);
+      position: relative;
+      max-width: 940px;
+      margin: 0 auto;
+      border-radius: 0 0 8px 8px;
+      overflow: visible;
+    }
+
+    .cover-pattern {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 40%);
+    }
+
+    .profile-info-row {
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 0 16px 12px;
+      display: flex;
+      align-items: flex-end;
+      gap: 16px;
+    }
+
+    .profile-pic {
+      width: 92px; height: 92px; border-radius: 50%;
+      background: var(--fb-blue);
+      border: 4px solid white;
+      margin-top: -36px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 34px; font-weight: 800; color: white;
+      flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      font-family: var(--font);
+      z-index: 2;
+    }
+
+    .profile-text { flex: 1; padding-bottom: 4px; }
+
+    .profile-name {
+      font-size: 24px; font-weight: 800;
+      color: var(--text-primary); margin-bottom: 2px;
+    }
+
+    .profile-friends {
+      font-size: 15px; color: var(--text-secondary);
+    }
+
+    .profile-actions {
+      display: flex; gap: 8px; align-items: center;
+      padding-bottom: 4px; flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: flex; align-items: center; gap: 6px;
+      padding: 7px 16px; border-radius: 6px;
+      background: var(--fb-blue); color: white;
+      font-size: 15px; font-weight: 700;
+      border: none; cursor: pointer; font-family: var(--font);
+      text-decoration: none; transition: background 0.15s;
+    }
+    .btn-primary:hover { background: var(--fb-blue-hover); }
+
+    .btn-secondary {
+      display: flex; align-items: center; gap: 6px;
+      padding: 7px 16px; border-radius: 6px;
+      background: var(--fb-bg); color: var(--text-primary);
+      font-size: 15px; font-weight: 700;
+      border: none; cursor: pointer; font-family: var(--font);
+      text-decoration: none; transition: background 0.15s;
+    }
+    .btn-secondary:hover { background: var(--fb-border-light); }
+
+    /* PROFILE TABS */
+    .profile-tabs {
+      max-width: 940px; margin: 0 auto;
+      border-top: 1px solid var(--fb-border-light);
+      display: flex; padding: 0 16px; gap: 4px;
+    }
+
+    .profile-tab {
+      padding: 14px 16px;
+      font-size: 15px; font-weight: 700;
+      color: var(--text-secondary); cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+      text-decoration: none;
+    }
+    .profile-tab:hover { color: var(--fb-blue); background: var(--fb-bg); border-radius: 8px 8px 0 0; }
+    .profile-tab.active { color: var(--fb-blue); border-bottom-color: var(--fb-blue); }
+
+    /* LAYOUT */
+    .page-wrap {
+      max-width: 940px; margin: 0 auto;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    /* CARDS */
+    .card {
+      background: var(--fb-card);
+      border-radius: 8px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 16px 16px 0;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .card-title {
+      font-size: 20px; font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .card-see-all {
+      color: var(--fb-blue); font-size: 14px; font-weight: 600;
+      cursor: pointer; text-decoration: none;
+    }
+    .card-see-all:hover { text-decoration: underline; }
+
+    /* ABOUT SECTION */
+    .about-section { padding: 12px 16px; }
+
+    .about-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 0;
+      font-size: 15px; color: var(--text-primary);
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background 0.15s;
+    }
+    .about-item:hover { background: var(--fb-bg); padding-left: 8px; }
+
+    .about-icon {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--fb-bg);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+
+    .about-text { flex: 1; min-width: 0; }
+    .about-label { font-weight: 600; color: var(--text-primary); font-size: 14px; }
+    .about-value { font-size: 14px; color: var(--text-secondary); }
+
+    .about-divider {
+      border: none; border-top: 1px solid var(--fb-border-light);
+      margin: 4px 0;
+    }
+
+    /* POST CARD */
+    .post-card {
+      background: var(--fb-card);
+      border-radius: 8px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+      margin-bottom: 16px;
+    }
+
+    .post-header {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 16px 0;
+    }
+
+    .post-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--fb-blue);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; font-weight: 800; color: white;
+      flex-shrink: 0;
+    }
+
+    .post-author-info { flex: 1; }
+
+    .post-author {
+      font-size: 15px; font-weight: 700; color: var(--text-primary);
+    }
+
+    .post-time {
+      font-size: 13px; color: var(--text-secondary);
+      display: flex; align-items: center; gap: 4px;
+    }
+
+    .post-globe { font-size: 12px; }
+
+    .post-menu {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; color: var(--text-secondary);
+      transition: background 0.15s;
+    }
+    .post-menu:hover { background: var(--fb-bg); }
+
+    .post-body {
+      padding: 12px 16px;
+      font-size: 15px; color: var(--text-primary);
+      line-height: 1.5;
+    }
+
+    .post-body a {
+      color: var(--fb-blue); text-decoration: none; font-weight: 600;
+    }
+    .post-body a:hover { text-decoration: underline; }
+
+    .post-emoji-big {
+      font-size: 13px;
+      background: var(--fb-bg);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-top: 8px;
+      display: block;
+      color: var(--text-secondary);
+    }
+
+    .post-link-preview {
+      margin: 0 16px 12px;
+      border: 1px solid var(--fb-border-light);
+      border-radius: 8px; overflow: hidden;
+      text-decoration: none; display: block;
+      transition: background 0.15s;
+    }
+    .post-link-preview:hover { background: var(--fb-bg); }
+
+    .link-preview-bar {
+      height: 6px;
+    }
+
+    .link-preview-body { padding: 10px 12px; }
+
+    .link-preview-domain {
+      font-size: 12px; color: var(--text-tertiary);
+      text-transform: uppercase; margin-bottom: 3px;
+    }
+
+    .link-preview-title {
+      font-size: 15px; font-weight: 700; color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    .link-preview-desc {
+      font-size: 13px; color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    .post-reactions {
+      padding: 6px 16px;
+      display: flex; align-items: center; justify-content: space-between;
+      color: var(--text-secondary); font-size: 15px;
+      border-top: 1px solid var(--fb-border-light);
+    }
+
+    .reaction-emojis { display: flex; align-items: center; gap: 4px; font-size: 14px; }
+
+    .post-actions {
+      display: flex; border-top: 1px solid var(--fb-border-light);
+    }
+
+    .post-action-btn {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      gap: 6px; padding: 6px;
+      background: none; border: none; cursor: pointer;
+      font-size: 15px; font-weight: 700; color: var(--text-secondary);
+      font-family: var(--font); border-radius: 0;
+      transition: background 0.15s;
+    }
+    .post-action-btn:hover { background: var(--fb-bg); }
+    .post-action-btn:first-child { border-radius: 0 0 0 8px; }
+    .post-action-btn:last-child { border-radius: 0 0 8px 0; }
+
+    /* FOOTER */
+    footer {
+      text-align: center; padding: 24px;
+      font-size: 13px; color: var(--text-tertiary);
+      max-width: 940px; margin: 0 auto;
+    }
+
+    footer a { color: var(--text-tertiary); text-decoration: none; margin: 0 6px; }
+    footer a:hover { text-decoration: underline; }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .page-wrap { grid-template-columns: 1fr; padding: 8px; }
+      .nav-center { display: none; }
+      .nav-search { display: none; }
+      .profile-name { font-size: 20px; }
+      .profile-cover { height: 140px; }
+      .profile-pic { width: 72px; height: 72px; font-size: 26px; margin-top: -36px; }
+      #clock { display: none; }
+       .profile-info-row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-pic {
+    margin-top: -36px;
+    margin-bottom: 8px;
+  }
+
+  .profile-actions {
+    justify-content: center;
+  }
+
+    }
+  </style>
+</head>
+<body>
+
+  <!-- FACEBOOK NAV -->
+  <nav class="topnav">
+    <div class="nav-left">
+      <a class="fb-logo" href="index.html">f</a>
+      <div class="nav-search">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Search
+      </div>
+    </div>
+    <div class="nav-center">
+      <a class="nav-tab active" href="links.html">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+      </a>
+      <a class="nav-tab" href="washu.html">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </a>
+      <a class="nav-tab" href="projects.html">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+      </a>
+    </div>
+    <div class="nav-right">
+      <div id="clock">CLT: --:--:--</div>
+      <a class="back-btn" href="index.html">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Home
+      </a>
+    </div>
+  </nav>
+
+  <!-- PROFILE COVER + HEADER -->
+  <div class="profile-cover-wrap">
+    <div class="profile-cover">
+      <div class="cover-pattern"></div>
+    </div>
+    <div class="profile-info-row">
+      <div class="profile-pic">CN</div>
+      <div class="profile-text">
+        <div class="profile-name">Christian Nguyens</div>
+        <div class="profile-friends">Rock Hill, SC · WashU BUCS '30 · 367 friends</div>
+      </div>
+      <div class="profile-actions">
+        <a class="btn-primary" href="https://www.linkedin.com/in/christian-nguyens-04965a233/" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a class="btn-secondary" href="https://www.instagram.com/chr1sti6n/" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          Instagram
+        </a>
+        <a class="btn-secondary" href="contact.html">
+          ···
+        </a>
+      </div>
+    </div>
+    <div class="profile-tabs">
+      <a class="profile-tab active" href="links.html">Links</a>
+      <a class="profile-tab" href="about.html">About</a>
+      <a class="profile-tab" href="projects.html">Projects</a>
+      <a class="profile-tab" href="washu.html">FAQ</a>
+      <a class="profile-tab" href="resume.html">College</a>
+    </div>
+  </div>
+
+  <div class="page-wrap">
+
+    <!-- LEFT SIDEBAR -->
+    <aside>
+
+      <!-- INTRO / ABOUT -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Intro</div>
+        </div>
+        <div class="about-section">
+
+          <a class="about-item" href="https://wustl.edu" target="_blank">
+            <div class="about-icon">🎓</div>
+            <div class="about-text">
+              <div class="about-label">Studies at WashU BUCS</div>
+              <div class="about-value">CS + Finance · Class of 2030</div>
+            </div>
+          </a>
+
+          <a class="about-item" href="#" >
+            <div class="about-icon">📍</div>
+            <div class="about-text">
+              <div class="about-label">Lives in Rock Hill, SC</div>
+              <div class="about-value">From South Carolina</div>
+            </div>
+          </a>
+
+          <a class="about-item" href="https://www.instagram.com/chr1sti6n/" target="_blank">
+            <div class="about-icon">📸</div>
+            <div class="about-text">
+              <div class="about-label">Instagram</div>
+              <div class="about-value">@chr1sti6n</div>
+            </div>
+          </a>
+
+          <a class="about-item" href="https://www.linkedin.com/in/christian-nguyens-04965a233/" target="_blank">
+            <div class="about-icon">💼</div>
+            <div class="about-text">
+              <div class="about-label">LinkedIn</div>
+              <div class="about-value">christian-nguyens</div>
+            </div>
+          </a>
+
+          <hr class="about-divider">
+
+          <div style="font-size:13px;font-weight:700;color:var(--text-secondary);padding:4px 0 8px;">Personal Links</div>
+
+          <a class="about-item" href="https://github.com/christiannguyens" target="_blank">
+            <div class="about-icon">🐙</div>
+            <div class="about-text">
+              <div class="about-label">GitHub</div>
+              <div class="about-value">christiannguyens</div>
+            </div>
+          </a>
+
+          <a class="about-item" href="https://open.spotify.com/user/mrsu6vtal1tyjjhcrp52i7r1q?si=8bf9108b5bf544c9" target="_blank">
+            <div class="about-icon">🎵</div>
+            <div class="about-text">
+              <div class="about-label">Spotify & Playlists</div>
+              <div class="about-value">Check out what I'm listening to</div>
+            </div>
+          </a>
+
+          <a class="about-item" href="https://www.strava.com/athletes/104111054" target="_blank">
+            <div class="about-icon">🏃</div>
+            <div class="about-text">
+              <div class="about-label">Strava</div>
+              <div class="about-value">Track my runs</div>
+            </div>
+          </a>
+
+          <a class="about-item" href="https://www.topquantunis.com/zetamoji" target="_blank">
+            <div class="about-icon">🎮</div>
+            <div class="about-text">
+              <div class="about-label">Zetamoji</div>
+              <div class="about-value">@larp_larp_larp_sahurrrr</div>
+            </div>
+          </a>
+
+          <a class="about-item" href="https://youtu.be/6gV8ZPv8u70?si=j5RfNSJWKxwGHrQV" target="_blank">
+            <div class="about-icon">🎬</div>
+            <div class="about-text">
+              <div class="about-label">College Decision Reaction</div>
+              <div class="about-value">Watch the video · 2026</div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- OTHER PAGES -->
+      <div class="card">
+        <div class="card-header" style="padding-bottom:12px;">
+          <div class="card-title">Pages</div>
+        </div>
+        <div class="about-section" style="padding-top:0;">
+          <a class="about-item" href="about.html"><div class="about-icon">👤</div><div class="about-text"><div class="about-label">About Me</div></div></a>
+          <a class="about-item" href="projects.html"><div class="about-icon">💻</div><div class="about-text"><div class="about-label">Projects</div></div></a>
+          <a class="about-item" href="resume.html"><div class="about-icon">🏫</div><div class="about-text"><div class="about-label">College Application</div></div></a>
+          <a class="about-item" href="washu.html"><div class="about-icon">🔮</div><div class="about-text"><div class="about-label">Future + FAQ</div></div></a>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- FEED / POSTS -->
+    <main>
+
+      <!-- POST 1: Favorite movie -->
+      <div class="post-card">
+        <div class="post-header">
+          <div class="post-avatar">CN</div>
+          <div class="post-author-info">
+            <div class="post-author">Christian Nguyens</div>
+            <div class="post-time">3 hrs ago · <span class="post-globe">🌐</span></div>
+          </div>
+          <button class="post-menu">···</button>
+        </div>
+        <div class="post-body">just watched this again for the third time. if you haven't seen it you're missing out</div>
+        <a class="post-link-preview" href="https://www.reddit.com/r/kdramas/comments/1jgpn28/hear_me_our_summer/" target="_blank">
+          <div class="link-preview-bar" style="background:linear-gradient(90deg,#e53935,#ff7043);"></div>
+          <div class="link-preview-body">
+            <div class="link-preview-domain">reddit.com · r/kdramas</div>
+            <div class="link-preview-title">my favorite movie</div>
+            <div class="link-preview-desc">Hear Me: Our Summer — a genuinely beautiful film. Watch it.</div>
+          </div>
+        </a>
+        <div class="post-reactions">
+          <div class="reaction-emojis">❤️ 👍 😮 <span style="font-size:14px;margin-left:4px;">47</span></div>
+          <div style="font-size:13px;color:var(--text-tertiary);">8 comments</div>
+        </div>
+        <div class="post-actions">
+          <button class="post-action-btn">👍 Like</button>
+          <button class="post-action-btn">💬 Comment</button>
+          <button class="post-action-btn">↗ Share</button>
+        </div>
+      </div>
+
+      <!-- POST 2: Album of the year -->
+      <div class="post-card">
+        <div class="post-header">
+          <div class="post-avatar">CN</div>
+          <div class="post-author-info">
+            <div class="post-author">Christian Nguyens</div>
+            <div class="post-time">5 hrs ago · <span class="post-globe">🌐</span></div>
+          </div>
+          <button class="post-menu">···</button>
+        </div>
+        <div class="post-body">album of the year 2026, thank you nett</div>
+        <a class="post-link-preview" href="https://genius.com/albums/Nettspend/Early-life-crisis" target="_blank">
+          <div class="link-preview-bar" style="background:linear-gradient(90deg,#6a1b9a,#ab47bc);"></div>
+          <div class="link-preview-body">
+            <div class="link-preview-domain">genius.com</div>
+            <div class="link-preview-title">Nettspend — Early Life Crisis</div>
+            <div class="link-preview-desc">My pick for album of the year 2026.</div>
+          </div>
+        </a>
+        <div class="post-reactions">
+          <div class="reaction-emojis">🔥 👍 <span style="font-size:14px;margin-left:4px;">23</span></div>
+          <div style="font-size:13px;color:var(--text-tertiary);">5 comments</div>
+        </div>
+        <div class="post-actions">
+          <button class="post-action-btn">👍 Like</button>
+          <button class="post-action-btn">💬 Comment</button>
+          <button class="post-action-btn">↗ Share</button>
+        </div>
+      </div>
+
+      <!-- POST 3: Favorite singer -->
+      <div class="post-card">
+        <div class="post-header">
+          <div class="post-avatar">CN</div>
+          <div class="post-author-info">
+            <div class="post-author">Christian Nguyens</div>
+            <div class="post-time">8 hrs ago · <span class="post-globe">🌐</span></div>
+          </div>
+          <button class="post-menu">···</button>
+        </div>
+        <div class="post-body">my favorite singer. this may be niche. i don't care</div>
+        <a class="post-link-preview" href="https://genius.com/artists/Yel-kor" target="_blank">
+          <div class="link-preview-bar" style="background:linear-gradient(90deg,#f57f17,#ffb300);"></div>
+          <div class="link-preview-body">
+            <div class="link-preview-domain">genius.com</div>
+            <div class="link-preview-title">Yel Kor — Artist Page</div>
+            <div class="link-preview-desc">My favorite singer. You probably haven't heard of them. That's okay.</div>
+          </div>
+        </a>
+        <div class="post-reactions">
+          <div class="reaction-emojis">🎵 👍 <span style="font-size:14px;margin-left:4px;">11</span></div>
+          <div style="font-size:13px;color:var(--text-tertiary);">2 comments</div>
+        </div>
+        <div class="post-actions">
+          <button class="post-action-btn">👍 Like</button>
+          <button class="post-action-btn">💬 Comment</button>
+          <button class="post-action-btn">↗ Share</button>
+        </div>
+      </div>
+
+      <!-- POST 4: Kpop crush -->
+      <div class="post-card">
+        <div class="post-header">
+          <div class="post-avatar">CN</div>
+          <div class="post-author-info">
+            <div class="post-author">Christian Nguyens</div>
+            <div class="post-time">Yesterday · <span class="post-globe">🌐</span></div>
+          </div>
+          <button class="post-menu">···</button>
+        </div>
+        <div class="post-body">my favorite kpop idol who i have a crush on. hopefully i can see one of her shows</div>
+        <a class="post-link-preview" href="https://en.wikipedia.org/wiki/Huh_Yunjin" target="_blank">
+          <div class="link-preview-bar" style="background:linear-gradient(90deg,#c62828,#ef5350);"></div>
+          <div class="link-preview-body">
+            <div class="link-preview-domain">wikipedia.org</div>
+            <div class="link-preview-title">Huh Yunjin</div>
+            <div class="link-preview-desc">South Korean-American singer and member of Le Sserafim.</div>
+          </div>
+        </a>
+        <div class="post-reactions">
+          <div class="reaction-emojis">😂 ❤️ 👍 <span style="font-size:14px;margin-left:4px;">34</span></div>
+          <div style="font-size:13px;color:var(--text-tertiary);">12 comments</div>
+        </div>
+        <div class="post-actions">
+          <button class="post-action-btn">👍 Like</button>
+          <button class="post-action-btn">💬 Comment</button>
+          <button class="post-action-btn">↗ Share</button>
+        </div>
+      </div>
+
+      <!-- POST 5: Best TikTok -->
+      <div class="post-card">
+        <div class="post-header">
+          <div class="post-avatar">CN</div>
+          <div class="post-author-info">
+            <div class="post-author">Christian Nguyens</div>
+            <div class="post-time">2 days ago · <span class="post-globe">🌐</span></div>
+          </div>
+          <button class="post-menu">···</button>
+        </div>
+        <div class="post-body">best tiktok ever made. dont. stop. gooning.</div>
+        <a class="post-link-preview" href="https://www.tiktok.com/@beeroclock_94/video/7603179063427042591?is_from_webapp=1&sender_device=pc" target="_blank">
+          <div class="link-preview-bar" style="background:linear-gradient(90deg,#000000,#ee1d52);"></div>
+          <div class="link-preview-body">
+            <div class="link-preview-domain">tiktok.com · @beeroclock_94</div>
+            <div class="link-preview-title">Best TikTok Ever</div>
+            <div class="link-preview-desc">just watch it</div>
+          </div>
+        </a>
+        <div class="post-reactions">
+          <div class="reaction-emojis">😂 🔥 <span style="font-size:14px;margin-left:4px;">19</span></div>
+          <div style="font-size:13px;color:var(--text-tertiary);">3 comments</div>
+        </div>
+        <div class="post-actions">
+          <button class="post-action-btn">👍 Like</button>
+          <button class="post-action-btn">💬 Comment</button>
+          <button class="post-action-btn">↗ Share</button>
+        </div>
+      </div>
+
+      <!-- POST 6: Car widebody -->
+      <div class="post-card">
+        <div class="post-header">
+          <div class="post-avatar">CN</div>
+          <div class="post-author-info">
+            <div class="post-author">Christian Nguyens</div>
+            <div class="post-time">3 days ago · <span class="post-globe">🌐</span></div>
+          </div>
+          <button class="post-menu">···</button>
+        </div>
+        <div class="post-body">saving up for this. one day. my corolla WILL look like this</div>
+        <a class="post-link-preview" href="https://www.krotovwbk.com/product-page/toyota-corolla-e210-hatchback-2018-2023-widebody-kit" target="_blank">
+          <div class="link-preview-bar" style="background:linear-gradient(90deg,#1565c0,#42a5f5);"></div>
+          <div class="link-preview-body">
+            <div class="link-preview-domain">krotovwbk.com</div>
+            <div class="link-preview-title">Toyota Corolla E210 Widebody Kit</div>
+            <div class="link-preview-desc">Widebody kit I'd like to purchase for my car.</div>
+          </div>
+        </a>
+        <div class="post-reactions">
+          <div class="reaction-emojis">😂 👍 🔥 <span style="font-size:14px;margin-left:4px;">28</span></div>
+          <div style="font-size:13px;color:var(--text-tertiary);">7 comments</div>
+        </div>
+        <div class="post-actions">
+          <button class="post-action-btn">👍 Like</button>
+          <button class="post-action-btn">💬 Comment</button>
+          <button class="post-action-btn">↗ Share</button>
+        </div>
+      </div>
+
+      <!-- POST 7: WashU niche -->
+      <div class="post-card">
+        <div class="post-header">
+          <div class="post-avatar">CN</div>
+          <div class="post-author-info">
+            <div class="post-author">Christian Nguyens</div>
+            <div class="post-time">4 days ago · <span class="post-globe">🌐</span></div>
+          </div>
+          <button class="post-menu">···</button>
+        </div>
+        <div class="post-body">for everyone who asks "what's washu" — this article explains it better than i ever could 😭</div>
+        <a class="post-link-preview" href="https://www.studlife.com/forum/staff-columnists/2010/09/17/washington-university-the-image-crisis" target="_blank">
+          <div class="link-preview-bar" style="background:linear-gradient(90deg,#a51417,#c62828);"></div>
+          <div class="link-preview-body">
+            <div class="link-preview-domain">studlife.com · Student Life</div>
+            <div class="link-preview-title">Washington University: The Image Crisis</div>
+            <div class="link-preview-desc">How niche my school is — a very real article from WashU's student newspaper.</div>
+          </div>
+        </a>
+        <div class="post-reactions">
+          <div class="reaction-emojis">😂 👍 <span style="font-size:14px;margin-left:4px;">15</span></div>
+          <div style="font-size:13px;color:var(--text-tertiary);">4 comments</div>
+        </div>
+        <div class="post-actions">
+          <button class="post-action-btn">👍 Like</button>
+          <button class="post-action-btn">💬 Comment</button>
+          <button class="post-action-btn">↗ Share</button>
+        </div>
+      </div>
+
+      <!-- POST 8: Ethan advice -->
+      <div class="post-card">
+        <div class="post-header">
+          <div class="post-avatar">CN</div>
+          <div class="post-author-info">
+            <div class="post-author">Christian Nguyens</div>
+            <div class="post-time">5 days ago · <span class="post-globe">🌐</span></div>
+          </div>
+          <button class="post-menu">···</button>
+        </div>
+        <div class="post-body">super cool dude i messaged when i got into washu. he gave me genuinely good advice — check him out 🙏 <a href="https://ethans.site/" target="_blank">ethans.site</a></div>
+        <a class="post-link-preview" href="https://posthog.com/newsletter/how-i-get-good-advice" target="_blank">
+          <div class="link-preview-bar" style="background:linear-gradient(90deg,#e65100,#ff8f00);"></div>
+          <div class="link-preview-body">
+            <div class="link-preview-domain">posthog.com</div>
+            <div class="link-preview-title">How I Get Good Advice — Ethan</div>
+            <div class="link-preview-desc">Advice I got from Ethan after getting into WashU. Worth the read.</div>
+          </div>
+        </a>
+        <div class="post-reactions">
+          <div class="reaction-emojis">❤️ 👍 <span style="font-size:14px;margin-left:4px;">22</span></div>
+          <div style="font-size:13px;color:var(--text-tertiary);">6 comments</div>
+        </div>
+        <div class="post-actions">
+          <button class="post-action-btn">👍 Like</button>
+          <button class="post-action-btn">💬 Comment</button>
+          <button class="post-action-btn">↗ Share</button>
+        </div>
+      </div>
+
+      <!-- POST 9: NHD project -->
+      <div class="post-card">
+        <div class="post-header">
+          <div class="post-avatar">CN</div>
+          <div class="post-author-info">
+            <div class="post-author">Christian Nguyens</div>
+            <div class="post-time">1 week ago · <span class="post-globe">🌐</span></div>
+          </div>
+          <button class="post-menu">···</button>
+        </div>
+        <div class="post-body">throwback to my 8th grade national history day project. i was really that guy 📚</div>
+        <a class="post-link-preview" href="https://site.nhd.org/22070314/home" target="_blank">
+          <div class="link-preview-bar" style="background:linear-gradient(90deg,#2e7d32,#43a047);"></div>
+          <div class="link-preview-body">
+            <div class="link-preview-domain">nhd.org</div>
+            <div class="link-preview-title">National History Day Project — 8th Grade</div>
+            <div class="link-preview-desc">My old NHD project from middle school. I was the s**t.</div>
+          </div>
+        </a>
+        <div class="post-reactions">
+          <div class="reaction-emojis">😂 ❤️ <span style="font-size:14px;margin-left:4px;">31</span></div>
+          <div style="font-size:13px;color:var(--text-tertiary);">9 comments</div>
+        </div>
+        <div class="post-actions">
+          <button class="post-action-btn">👍 Like</button>
+          <button class="post-action-btn">💬 Comment</button>
+          <button class="post-action-btn">↗ Share</button>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <footer>
+    Produced by Christian Nguyens · Rock Hill, SC · WashU BUCS '30<br>
+    <a href="index.html">Home</a> · <a href="about.html">About</a> · <a href="projects.html">Projects</a> · <a href="contact.html">Contact</a>
+  </footer>
+
+  <script>
+    function updateClock() {
+      const now = new Date().toLocaleTimeString("en-US", {
+        timeZone: "America/New_York",
+        hour: "2-digit", minute: "2-digit", second: "2-digit"
+      });
+      document.getElementById("clock").textContent = "CLT: " + now;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="favicon-16x16.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta charset="UTF-8">
+  <title>College Application — Christian Nguyens</title>
+  <meta property="og:title" content="Christian Nguyens" />
+  <meta property="og:description" content="Incoming freshman @ WashU trying to break into CS and finance." />
+  <meta property="og:image" content="android-chrome-512x512.png" />
+  <meta property="og:url" content="https://christiannguyens.github.io/cnguyens/" />
+  <meta property="og:type" content="website" />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --li-blue: #0a66c2;
+      --li-blue-hover: #004182;
+      --li-blue-light: #e8f3ff;
+      --bg: #f3f2ef;
+      --bg-card: #ffffff;
+      --border: #e0dfdc;
+      --text-primary: #191919;
+      --text-secondary: #666666;
+      --text-tertiary: #999999;
+      --font: 'Source Sans 3', system-ui, sans-serif;
+    }
+
+    html, body { overflow-x: hidden; width: 100%; }
+
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: var(--font);
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .topnav {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 52px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .nav-logo { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+
+    .nav-logo-box {
+      width: 34px; height: 34px; background: var(--li-blue); border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-weight: 700; font-size: 16px; flex-shrink: 0;
+    }
+
+    .nav-search {
+      display: flex; align-items: center; gap: 8px;
+      background: #eef3f8; border-radius: 4px; padding: 6px 12px;
+      font-size: 14px; color: var(--text-secondary); width: 240px;
+    }
+
+    .nav-right { display: flex; align-items: center; gap: 20px; }
+
+    .nav-item {
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      font-size: 11px; color: var(--text-secondary);
+      text-decoration: none; transition: color 0.15s;
+    }
+    .nav-item:hover { color: var(--text-primary); }
+
+    .nav-item.back-item {
+      color: var(--li-blue); font-weight: 600; font-size: 13px;
+      flex-direction: row; gap: 6px;
+    }
+
+    .page-wrap {
+      max-width: 1080px; margin: 24px auto; padding: 0 24px;
+      display: grid; grid-template-columns: 1fr 320px;
+      gap: 24px; align-items: start;
+    }
+
+    .card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 8px; overflow: hidden; margin-bottom: 12px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .profile-banner {
+      height: 96px;
+      background: linear-gradient(135deg, #0a66c2 0%, #0073b1 50%, #00a0dc 100%);
+      position: relative;
+    }
+
+
+    .profile-body { padding: 52px 20px 16px; }
+    .profile-name { font-size: 22px; font-weight: 700; margin-bottom: 3px; }
+    .profile-headline { font-size: 15px; margin-bottom: 6px; }
+    .profile-location { font-size: 13px; color: var(--li-blue); margin-bottom: 12px; }
+
+    .profile-school {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;
+    }
+
+    .school-logo {
+      width: 20px; height: 20px; border-radius: 3px; background: var(--li-blue);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700; color: white; flex-shrink: 0;
+    }
+
+    .profile-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .btn-primary {
+      padding: 6px 18px; background: var(--li-blue); color: white;
+      border: none; border-radius: 16px; font-size: 14px; font-weight: 600;
+      cursor: pointer; font-family: var(--font); transition: background 0.15s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-primary:hover { background: var(--li-blue-hover); }
+
+    .btn-secondary {
+      padding: 5px 18px; background: transparent; color: var(--li-blue);
+      border: 1.5px solid var(--li-blue); border-radius: 16px;
+      font-size: 14px; font-weight: 600; cursor: pointer; font-family: var(--font);
+      transition: background 0.15s; text-decoration: none; display: inline-block;
+    }
+    .btn-secondary:hover { background: var(--li-blue-light); }
+
+    .card-section { padding: 20px; }
+    .card-section + .card-section { border-top: 1px solid var(--border); }
+
+    .section-title { font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; }
+    .section-subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 16px; margin-top: -10px; }
+
+    .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+    .stat-box {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 8px; padding: 14px; text-align: center;
+    }
+
+    .stat-num { font-size: 28px; font-weight: 700; color: var(--li-blue); line-height: 1; margin-bottom: 4px; }
+    .stat-label { font-size: 12px; color: var(--text-secondary); }
+
+    .resource-card {
+      border: 1px solid var(--border); border-radius: 8px; padding: 16px;
+      margin-bottom: 10px; display: flex; align-items: center; gap: 14px;
+      text-decoration: none; transition: background 0.15s, border-color 0.15s;
+      background: var(--bg-card);
+    }
+    .resource-card:hover { background: #f9f9f9; border-color: var(--li-blue); }
+    .resource-card:last-child { margin-bottom: 0; }
+
+    .resource-icon {
+      width: 44px; height: 44px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; flex-shrink: 0;
+    }
+
+    .resource-info { flex: 1; min-width: 0; }
+    .resource-title { font-size: 15px; font-weight: 600; color: var(--li-blue); margin-bottom: 2px; }
+    .resource-desc { font-size: 13px; color: var(--text-secondary); }
+
+    .resource-badge {
+      font-size: 11px; padding: 3px 10px;
+      background: var(--li-blue-light); color: var(--li-blue);
+      border-radius: 12px; font-weight: 600; white-space: nowrap; flex-shrink: 0;
+    }
+
+    .advice-item { display: flex; gap: 14px; margin-bottom: 18px; align-items: flex-start; }
+    .advice-item:last-child { margin-bottom: 0; }
+
+    .advice-num {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--li-blue); color: white;
+      font-size: 13px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 1px;
+    }
+
+    .advice-content { flex: 1; }
+    .advice-title { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 3px; }
+    .advice-text { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+    .timeline-item { display: flex; gap: 14px; margin-bottom: 20px; }
+    .timeline-item:last-child { margin-bottom: 0; }
+
+    .timeline-logo {
+      width: 44px; height: 44px; border-radius: 4px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; color: white; border: 1px solid var(--border);
+    }
+
+    .timeline-info { flex: 1; min-width: 0; }
+    .timeline-title { font-size: 15px; font-weight: 600; color: var(--text-primary); }
+    .timeline-org { font-size: 14px; color: var(--text-primary); margin-bottom: 1px; }
+    .timeline-date { font-size: 13px; color: var(--text-secondary); margin-bottom: 4px; }
+    .timeline-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.55; }
+
+    .sidebar-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 12px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05); padding: 16px;
+    }
+
+    .sidebar-title { font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 12px; }
+
+    .sidebar-stat {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px;
+    }
+    .sidebar-stat:last-child { border-bottom: none; }
+    .sidebar-stat-label { color: var(--text-secondary); }
+    .sidebar-stat-value { font-weight: 600; color: var(--text-primary); }
+
+    .open-to-card {
+      background: linear-gradient(135deg, #e8f3ff, #ddeeff);
+      border: 1px solid #b3d4f5; border-radius: 8px;
+      padding: 16px; margin-bottom: 12px;
+    }
+    .open-to-title {
+      font-size: 13px; font-weight: 700; color: var(--li-blue);
+      text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;
+    }
+    .open-to-text { font-size: 14px; color: var(--text-primary); font-weight: 500; }
+
+    footer {
+      text-align: center; padding: 32px 24px;
+      font-size: 12px; color: var(--text-tertiary);
+      border-top: 1px solid var(--border); margin-top: 24px;
+    }
+    footer a { color: var(--text-tertiary); text-decoration: none; margin: 0 8px; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 768px) {
+      .page-wrap { grid-template-columns: 1fr; padding: 0 12px; margin: 12px auto; gap: 12px; }
+      .nav-search { display: none; }
+      .nav-right { gap: 12px; }
+      .profile-name { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="topnav">
+    <div style="display:flex;align-items:center;gap:16px;">
+      <a class="nav-logo" href="index.html">
+        <div class="nav-logo-box">in</div>
+      </a>
+      <div class="nav-search">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Search
+      </div>
+    </div>
+    <div class="nav-right">
+      <a class="nav-item" href="index.html">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+        Home
+      </a>
+      <a class="nav-item" href="projects.html">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+        Projects
+      </a>
+      <a class="nav-item" href="links.html">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Network
+      </a>
+      <a class="nav-item back-item" href="index.html">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Back
+      </a>
+    </div>
+  </nav>
+
+  <div class="page-wrap">
+    <main>
+
+      <div class="card">
+        <div class="profile-banner"></div>
+        <div class="profile-avatar-wrap">
+        </div>
+        <div class="profile-body">
+          <div class="profile-name">Christian Nguyens</div>
+          <div class="profile-headline">Applied to 30 colleges · $0 in fees · WashU ED2 · BUCS Class of 2030</div>
+          <div class="profile-location">Rock Hill, South Carolina</div>
+          <div class="profile-school">
+            <div class="school-logo">W</div>
+            Washington University in St. Louis · Early Decision 2 · Class of 2030
+          </div>
+          <div class="profile-actions">
+            <a class="btn-primary" href="contact.html">Connect</a>
+            <a class="btn-secondary" href="links.html">Message</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-section">
+          <div class="section-title">By the Numbers</div>
+          <div class="stat-row">
+            <div class="stat-box">
+              <div class="stat-num">30</div>
+              <div class="stat-label">Colleges applied to</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num">$0</div>
+              <div class="stat-label">Spent on fees</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num">ED2</div>
+              <div class="stat-label">WashU decision type</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-section">
+          <div class="section-title">About This Page</div>
+          <div style="font-size:15px;color:var(--text-primary);line-height:1.7;">
+            These are all of the resources I made when applying to college. I applied to a total of 30 colleges — and every single one was free thanks to fee waivers. Feel free to explore and take inspiration from any of them.
+            <br><br>
+            I ended up getting into Washington University in St. Louis through Early Decision 2, which is binding — meaning I committed to attend once accepted. No regrets.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-section">
+          <div class="section-title">Resources</div>
+          <div class="section-subtitle">Real documents I used — open to everyone.</div>
+
+          <a class="resource-card" href="https://docs.google.com/document/d/1-pgonl9hXzZD6epctwYUNcdYmX_9r4_IkRXXcrefjJ4/edit?usp=sharing" target="_blank">
+            <div class="resource-icon" style="background:#e8f3ff;">📄</div>
+            <div class="resource-info">
+              <div class="resource-title">WashU Accepted Profile</div>
+              <div class="resource-desc">My full admissions profile — the exact application that got me in ED2.</div>
+            </div>
+            <span class="resource-badge">Google Doc</span>
+          </a>
+
+          <a class="resource-card" href="https://docs.google.com/spreadsheets/d/1iAjZq3FSztMqUshAJ_mAvUuBHVsL2PcsW8P83t99U2M/edit?usp=sharing" target="_blank">
+            <div class="resource-icon" style="background:#e6f4ea;">📊</div>
+            <div class="resource-info">
+              <div class="resource-title">Application Spreadsheet</div>
+              <div class="resource-desc">My real-time organizer tracking all 30 colleges — deadlines, requirements, status.</div>
+            </div>
+            <span class="resource-badge">Google Sheets</span>
+          </a>
+
+          <a class="resource-card" href="https://docs.google.com/document/d/1ob5lCvVc8dwa_5Qwg3rsTWG-XFdtLcJquK664s1E-U8/edit?usp=sharing" target="_blank">
+            <div class="resource-icon" style="background:#fff3e0;">✍️</div>
+            <div class="resource-info">
+              <div class="resource-title">Writing Masterkey</div>
+              <div class="resource-desc">Every essay I wrote for every school. Most written in just a few days.</div>
+            </div>
+            <span class="resource-badge">Google Doc</span>
+          </a>
+
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-section">
+          <div class="section-title">Words of Advice</div>
+          <div class="section-subtitle">Tips I heard that actually helped. Feel free to listen — or not. It's up to you.</div>
+
+          <div class="advice-item">
+            <div class="advice-num">1</div>
+            <div class="advice-content">
+              <div class="advice-title">Get fee waivers. Apply for free.</div>
+              <div class="advice-text">All 30 of the schools I applied to were completely free. Fee waivers are widely available — through CommonApp, QuestBridge, school websites, and more. There's no reason to pay to apply.</div>
+            </div>
+          </div>
+
+          <div class="advice-item">
+            <div class="advice-num">2</div>
+            <div class="advice-content">
+              <div class="advice-title">Be niche. Be yourself.</div>
+              <div class="advice-text">No one likes a basic, run-of-the-mill applicant. Admissions officers read thousands of essays. The ones that stand out are specific, personal, and genuine — not the ones that sound impressive.</div>
+            </div>
+          </div>
+
+          <div class="advice-item">
+            <div class="advice-num">3</div>
+            <div class="advice-content">
+              <div class="advice-title">Use Early Decision strategically.</div>
+              <div class="advice-text">If you want to get into a top school and prestige matters to you, ED gives you a real boost. But it's binding — only go ED if you've done your research and you're genuinely committed to that school.</div>
+            </div>
+          </div>
+
+          <div class="advice-item">
+            <div class="advice-num">4</div>
+            <div class="advice-content">
+              <div class="advice-title">Don't limit yourself.</div>
+              <div class="advice-text">Apply to as many schools as you want. You miss 100% of the shots you don't take. With fee waivers, there's nothing stopping you from casting a wide net.</div>
+            </div>
+          </div>
+
+          <div class="advice-item">
+            <div class="advice-num">5</div>
+            <div class="advice-content">
+              <div class="advice-title">Have fun with it.</div>
+              <div class="advice-text">Applying to college gets boring and tedious when you aren't obsessed with the process. If you can find something exciting about it — the research, the writing, the strategy — it becomes a lot more bearable.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-section">
+          <div class="section-title">Education</div>
+
+          <div class="timeline-item">
+            <div class="timeline-logo" style="background:#a51417;">W</div>
+            <div class="timeline-info">
+              <div class="timeline-title">Washington University in St. Louis</div>
+              <div class="timeline-org">B.S. Computer Science & Finance · Joint BUCS Program</div>
+              <div class="timeline-date">Aug 2026 – May 2030 · Early Decision 2</div>
+              <div class="timeline-desc">Admitted ED2. Top-15 university nationally. Binding commitment — made with full confidence after thorough research into the program.</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-logo" style="background:#1a5c9a;">HS</div>
+            <div class="timeline-info">
+              <div class="timeline-title">Public High School</div>
+              <div class="timeline-org">Rock Hill, South Carolina</div>
+              <div class="timeline-date">2022 – 2026</div>
+              <div class="timeline-desc">Applied to 30 schools independently, secured fee waivers for all of them, and committed to WashU ED2.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+
+    <aside>
+
+      <div class="open-to-card">
+        <div class="open-to-title">Open to Questions</div>
+        <div class="open-to-text">Have questions about the process? Feel free to reach out — happy to help.</div>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-title">Application Stats</div>
+        <div class="sidebar-stat">
+          <span class="sidebar-stat-label">Schools applied</span>
+          <span class="sidebar-stat-value">30</span>
+        </div>
+        <div class="sidebar-stat">
+          <span class="sidebar-stat-label">App fees paid</span>
+          <span class="sidebar-stat-value">$0</span>
+        </div>
+        <div class="sidebar-stat">
+          <span class="sidebar-stat-label">Decision type</span>
+          <span class="sidebar-stat-value">ED2</span>
+        </div>
+        <div class="sidebar-stat">
+          <span class="sidebar-stat-label">School type</span>
+          <span class="sidebar-stat-value">Public HS</span>
+        </div>
+        <div class="sidebar-stat">
+          <span class="sidebar-stat-label">WashU rank</span>
+          <span class="sidebar-stat-value">Top 15 nationally</span>
+        </div>
+        <div class="sidebar-stat">
+          <span class="sidebar-stat-label">Class</span>
+          <span class="sidebar-stat-value">2030</span>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-title">Quick Links</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <a href="https://docs.google.com/document/d/1-pgonl9hXzZD6epctwYUNcdYmX_9r4_IkRXXcrefjJ4/edit?usp=sharing" target="_blank" style="color:var(--li-blue);font-size:14px;text-decoration:none;font-weight:500;">📄 WashU Accepted Profile</a>
+          <a href="https://docs.google.com/spreadsheets/d/1iAjZq3FSztMqUshAJ_mAvUuBHVsL2PcsW8P83t99U2M/edit?usp=sharing" target="_blank" style="color:var(--li-blue);font-size:14px;text-decoration:none;font-weight:500;">📊 Application Spreadsheet</a>
+          <a href="https://docs.google.com/document/d/1ob5lCvVc8dwa_5Qwg3rsTWG-XFdtLcJquK664s1E-U8/edit?usp=sharing" target="_blank" style="color:var(--li-blue);font-size:14px;text-decoration:none;font-weight:500;">✍️ Writing Masterkey</a>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-title">Other Pages</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <a href="about.html" style="color:var(--li-blue);font-size:14px;text-decoration:none;font-weight:500;">→ About Me</a>
+          <a href="projects.html" style="color:var(--li-blue);font-size:14px;text-decoration:none;font-weight:500;">→ Projects</a>
+          <a href="future.html" style="color:var(--li-blue);font-size:14px;text-decoration:none;font-weight:500;">→ Future + FAQ</a>
+          <a href="links.html" style="color:var(--li-blue);font-size:14px;text-decoration:none;font-weight:500;">→ Links</a>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+
+  <footer>
+    <div style="margin-bottom:10px;">
+      <a href="#">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="links.html">Links</a>
+    </div>
+    Curated by Christian Nguyens © 2026 · Rock Hill, SC
+  </footer>
+
+</body>
+</html>

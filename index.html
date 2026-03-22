@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="favicon-16x16.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Christian Nguyens</title>
+  <link href="https://fonts.googleapis.com/css2?family=Product+Sans:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --g-blue: #4285f4;
+      --g-red: #ea4335;
+      --g-yellow: #fbbc05;
+      --g-green: #34a853;
+      --text-primary: #202124;
+      --text-secondary: #4d5156;
+      --text-tertiary: #70757a;
+      --border: #dfe1e5;
+      --bg: #fff;
+      --surface: #f8f9fa;
+      --ai-bg: #e8f0fe;
+      --ai-border: #4285f4;
+      --link-color: #1a0dab;
+      --visited: #4285f4;
+      --url-color: #188038;
+    }
+
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* TOP BAR */
+    .topbar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 12px 20px;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .topbar a {
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+
+    .topbar a:hover { text-decoration: underline; }
+
+    .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--g-blue);
+      color: white;
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    /* HERO */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 20px 30px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* LOGO */
+    .logo {
+      font-size: clamp(48px, 10vw, 82px);
+      font-weight: 700;
+      letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 28px;
+      font-family: 'Product Sans', sans-serif;
+      cursor: default;
+      user-select: none;
+    }
+
+    .logo span:nth-child(1) { color: var(--g-blue); }
+    .logo span:nth-child(2) { color: var(--g-red); }
+    .logo span:nth-child(3) { color: var(--g-yellow); }
+    .logo span:nth-child(4) { color: var(--g-blue); }
+    .logo span:nth-child(5) { color: var(--g-green); }
+    .logo span:nth-child(6) { color: var(--g-red); }
+    .logo span:nth-child(7) { color: var(--g-yellow); }
+    .logo span:nth-child(8) { color: var(--g-green); }
+    .logo span:nth-child(9) { color: var(--g-blue); }
+    .logo span:nth-child(10){ color: var(--g-green); }
+    .logo span:nth-child(11){ color: var(--g-blue); }
+    .logo span:nth-child(12){ color: var(--g-red); }
+    .logo span:nth-child(13){ color: var(--g-yellow); }
+    .logo span:nth-child(14){ color: var(--g-green); }
+    .logo span:nth-child(15){ color: var(--g-blue); }
+    .logo span:nth-child(16){ color: var(--g-red); }
+
+    /* SEARCH BAR */
+    .search-wrap {
+      width: 100%;
+      max-width: 580px;
+      margin-bottom: 20px;
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 12px 20px;
+      background: var(--bg);
+      box-shadow: 0 1px 6px rgba(32,33,36,.12);
+      transition: box-shadow 0.2s;
+      cursor: text;
+    }
+
+    .search-bar:hover {
+      box-shadow: 0 1px 12px rgba(32,33,36,.2);
+    }
+
+    .search-icon {
+      flex-shrink: 0;
+      color: var(--text-tertiary);
+    }
+
+    .search-text {
+      flex: 1;
+      font-size: 16px;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 18px;
+      background: var(--g-blue);
+      margin-left: 1px;
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+
+    .mic-icon {
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    /* RESULTS */
+    .results {
+      width: 100%;
+      max-width: 680px;
+      padding: 0 20px;
+      margin: 0 auto;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.2s forwards;
+    }
+
+    .result-meta {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* AI OVERVIEW */
+    .ai-overview {
+      background: #f0f4ff;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 28px;
+      border: 1px solid #c5d4f8;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ai-overview::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: linear-gradient(180deg, var(--g-blue), var(--g-green));
+    }
+
+    .ai-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--g-blue);
+      margin-bottom: 10px;
+      padding-left: 10px;
+    }
+
+    .ai-stars {
+      display: flex;
+      gap: 2px;
+    }
+
+    .star {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+    }
+
+    .star:nth-child(1) { background: var(--g-blue); }
+    .star:nth-child(2) { background: var(--g-red); }
+    .star:nth-child(3) { background: var(--g-yellow); }
+    .star:nth-child(4) { background: var(--g-green); }
+
+    .ai-text {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-primary);
+      padding-left: 10px;
+    }
+
+    .ai-text strong {
+      font-weight: 500;
+    }
+
+    /* RESULT LINKS */
+    .result-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .result-item {
+      text-decoration: none;
+      display: block;
+      cursor: pointer;
+    }
+
+    .result-url {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text-tertiary);
+      margin-bottom: 3px;
+    }
+
+    .result-favicon {
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .result-title {
+      font-size: 20px;
+      color: var(--link-color);
+      font-weight: 400;
+      margin-bottom: 4px;
+      line-height: 1.3;
+      transition: color 0.1s;
+    }
+
+    .result-item:hover .result-title {
+      text-decoration: underline;
+      color: #1a0dab;
+    }
+
+    .result-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.58;
+    }
+
+    .result-desc .date {
+      color: var(--text-tertiary);
+    }
+
+    /* FOOTER */
+    footer {
+      margin-top: auto;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 14px 24px;
+      font-size: 14px;
+      color: var(--text-tertiary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    footer a {
+      color: var(--text-tertiary);
+      text-decoration: none;
+      margin-left: 20px;
+    }
+
+    footer a:hover { text-decoration: underline; }
+
+    /* MOBILE */
+    @media (max-width: 600px) {
+      .hero { padding: 40px 16px 24px; }
+      .logo { font-size: 48px; margin-bottom: 20px; }
+      .results { padding: 0 16px; }
+      .result-title { font-size: 18px; }
+      footer { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <a href="people.html">Contact</a>
+    <a href="links.html">Links</a>
+    <div class="avatar">CN</div>
+  </div>
+
+  <div class="hero">
+    <div class="logo" aria-label="Christian Nguyens">
+      <span>C</span><span>h</span><span>r</span><span>i</span><span>s</span><span>t</span><span>i</span><span>a</span><span>n</span> <span>N</span><span>g</span><span>u</span><span>y</span><span>e</span><span>n</span><span>s</span>
+    </div>
+
+    <div class="search-wrap">
+      <div class="search-bar">
+        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <div class="search-text" id="searchText"></div>
+        <svg class="mic-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4285f4" stroke-width="2">
+          <rect x="9" y="2" width="6" height="12" rx="3"/>
+          <path d="M5 10a7 7 0 0 0 14 0"/><line x1="12" y1="19" x2="12" y2="22"/>
+          <line x1="8" y1="22" x2="16" y2="22"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="results">
+    <div class="result-meta">About 1 result (0.38 seconds)</div>
+
+    <div class="ai-overview">
+      <div class="ai-label">
+        <div class="ai-stars">
+          <div class="star"></div><div class="star"></div>
+          <div class="star"></div><div class="star"></div>
+        </div>
+        AI Overview
+      </div>
+      <div class="ai-text">
+        <strong>Christian Nguyens</strong> is an incoming freshman at <strong>Washington University in St. Louis</strong>, 
+        studying Computer Science and Business through the Joint BUCS program. A senior from Rock Hill, SC, 
+        he's passionate about fintech, big tech, and the intersection of business and technology. 
+        His background blends engineering curiosity with financial ambition — and he's just getting started.
+      </div>
+    </div>
+
+    <div class="result-list">
+
+      <a class="result-item" href="about.html">
+        <div class="result-url">
+          <svg class="result-favicon" viewBox="0 0 16 16" fill="none">
+            <circle cx="8" cy="8" r="8" fill="#4285f4"/>
+            <text x="8" y="11.5" text-anchor="middle" font-size="9" fill="white" font-family="sans-serif" font-weight="bold">C</text>
+          </svg>
+          christian.dev › about
+        </div>
+        <div class="result-title">More About Me — Christian Nguyens</div>
+        <div class="result-desc">
+          <span class="date">2026 · </span>
+          Background, interests, and what drives Christian — from engineering roots to fintech ambitions at WashU.
+        </div>
+      </a>
+
+      <a class="result-item" href="projects.html">
+        <div class="result-url">
+          <svg class="result-favicon" viewBox="0 0 16 16" fill="none">
+            <circle cx="8" cy="8" r="8" fill="#34a853"/>
+            <text x="8" y="11.5" text-anchor="middle" font-size="9" fill="white" font-family="sans-serif" font-weight="bold">P</text>
+          </svg>
+          christian.dev › projects
+        </div>
+        <div class="result-title">Projects — Christian Nguyens</div>
+        <div class="result-desc">
+          <span class="date">2026 · </span>
+          A collection of technical and creative projects built along the way — code, tools, and experiments.
+        </div>
+      </a>
+
+      <a class="result-item" href="resume.html">
+        <div class="result-url">
+          <svg class="result-favicon" viewBox="0 0 16 16" fill="none">
+            <circle cx="8" cy="8" r="8" fill="#fbbc05"/>
+            <text x="8" y="11.5" text-anchor="middle" font-size="9" fill="white" font-family="sans-serif" font-weight="bold">C</text>
+          </svg>
+          christian.dev › college
+        </div>
+        <div class="result-title">College Application Process — Christian Nguyens</div>
+        <div class="result-desc">
+          <span class="date">2026 · </span>
+          Advice, reflections, and honest lessons learned from applying to top universities as a first-gen student.
+        </div>
+      </a>
+
+      <a class="result-item" href="washu.html">
+        <div class="result-url">
+          <svg class="result-favicon" viewBox="0 0 16 16" fill="none">
+            <circle cx="8" cy="8" r="8" fill="#ea4335"/>
+            <text x="8" y="11.5" text-anchor="middle" font-size="9" fill="white" font-family="sans-serif" font-weight="bold">F</text>
+          </svg>
+          christian.dev › future
+        </div>
+        <div class="result-title">Future + FAQ — Christian Nguyens</div>
+        <div class="result-desc">
+          <span class="date">2026 · </span>
+          What is he doing now? What will his future entail? Questions about that, answered.
+        </div>
+      </a>
+
+      <a class="result-item" href="links.html">
+        <div class="result-url">
+          <svg class="result-favicon" viewBox="0 0 16 16" fill="none">
+            <circle cx="8" cy="8" r="8" fill="#4285f4"/>
+            <text x="8" y="11.5" text-anchor="middle" font-size="9" fill="white" font-family="sans-serif" font-weight="bold">L</text>
+          </svg>
+          christian.dev › links
+        </div>
+        <div class="result-title">Links — Christian Nguyens</div>
+        <div class="result-desc">
+          <span class="date">2026 · </span>
+          GitHub, LinkedIn, and everything else worth following. Find Christian across the web.
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <footer>
+    <span>Rock Hill, SC · WashU 2030</span>
+    <div>
+      <a href="about.html">About</a>
+      <a href="links.html">Links</a>
+      <a href="people.html">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    const queries = [
+      "who is christian nguyens?",
+      "christian nguyens washu",
+      "christian nguyens cs finance",
+      "christian nguyens projects",
+    ];
+
+    const el = document.getElementById('searchText');
+    const fullText = queries[0];
+    let i = 0;
+
+    function type() {
+      if (i <= fullText.length) {
+        el.innerHTML = fullText.slice(0, i) + '<span class="cursor"></span>';
+        i++;
+        setTimeout(type, 60 + Math.random() * 40);
+      } else {
+        el.innerHTML = fullText + '<span class="cursor"></span>';
+      }
+    }
+
+    setTimeout(type, 400);
+  </script>
+</body>
+</html>

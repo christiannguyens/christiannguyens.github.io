@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>About Me — Christian Nguyens</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --g-blue: #4285f4;
+      --g-red: #ea4335;
+      --g-yellow: #fbbc05;
+      --g-green: #34a853;
+      --text-primary: #202124;
+      --text-secondary: #4d5156;
+      --text-tertiary: #70757a;
+      --border: #d9d9d9;
+      --bg: #fff;
+      --surface: #f8f9fa;
+      --infobox-bg: #f8f9fa;
+      --link: #3366cc;
+      --link-hover: #1a4a9e;
+      --font-serif: 'Lora', Georgia, serif;
+      --font-sans: 'Source Sans 3', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text-primary);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* TOP NAV */
+    .topnav {
+      border-bottom: 1px solid var(--border);
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-family: var(--font-sans);
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      transition: box-shadow 0.2s, background 0.2s;
+    }
+
+    .back-btn:hover {
+      box-shadow: 0 1px 6px rgba(32,33,36,.2);
+      background: var(--surface);
+    }
+
+    .nav-title {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      font-family: var(--font-sans);
+    }
+
+    /* LAYOUT */
+    .page-wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 36px 24px 80px;
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* ARTICLE */
+    .article { min-width: 0; }
+
+    .article-title {
+      font-family: var(--font-serif);
+      font-size: 36px;
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+      margin-bottom: 6px;
+    }
+
+    .article-subtitle {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+
+    .article p {
+      margin-bottom: 16px;
+      font-size: 15.5px;
+      color: var(--text-primary);
+    }
+
+    .article a {
+      color: var(--link);
+      text-decoration: none;
+    }
+
+    .article a:hover {
+      text-decoration: underline;
+      color: var(--link-hover);
+    }
+
+    /* SECTION HEADERS */
+    .article h2 {
+      font-family: var(--font-sans);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 4px;
+      margin: 32px 0 14px;
+    }
+
+    .article h3 {
+      font-family: var(--font-sans);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 22px 0 8px;
+    }
+
+    /* LEAD PARAGRAPH */
+    .lead {
+      font-size: 16px !important;
+    }
+
+    /* FOOTNOTES */
+    sup {
+      font-size: 11px;
+      line-height: 0;
+      position: relative;
+      top: -4px;
+    }
+
+    sup a {
+      color: var(--link);
+      text-decoration: none;
+      font-family: var(--font-sans);
+    }
+
+    sup a:hover { text-decoration: underline; }
+
+    .footnotes {
+      margin-top: 48px;
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+
+    .footnotes h2 {
+      font-size: 17px !important;
+      margin-top: 0 !important;
+    }
+
+    .footnotes ol {
+      padding-left: 20px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .footnotes ol li {
+      margin-bottom: 6px;
+    }
+
+    .footnotes ol li a {
+      color: var(--link);
+    }
+
+    /* INFOBOX */
+    .infobox {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--infobox-bg);
+      overflow: hidden;
+      font-size: 14px;
+      position: sticky;
+      top: 70px;
+    }
+
+    .infobox-header {
+      background: var(--text-primary);
+      color: #fff;
+      padding: 12px 16px;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 15px;
+      text-align: center;
+    }
+
+    .infobox-photo {
+      width: 100%;
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, #e8f0fe 0%, #d2e3fc 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .infobox-initials {
+      font-family: var(--font-serif);
+      font-size: 64px;
+      font-weight: 600;
+      color: var(--g-blue);
+      opacity: 0.6;
+    }
+
+    .infobox-photo-caption {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      text-align: center;
+      padding: 6px 12px;
+      border-bottom: 1px solid var(--border);
+      font-style: italic;
+    }
+
+    .infobox table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .infobox tr {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .infobox tr:last-child {
+      border-bottom: none;
+    }
+
+    .infobox td {
+      padding: 8px 12px;
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    .infobox td:first-child {
+      font-weight: 600;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      width: 40%;
+      font-size: 13px;
+    }
+
+    .infobox td:last-child {
+      color: var(--text-primary);
+      font-size: 13px;
+    }
+
+    .infobox td a {
+      color: var(--link);
+      text-decoration: none;
+    }
+
+    .infobox td a:hover { text-decoration: underline; }
+
+    .infobox-tag {
+      display: inline-block;
+      background: #e8f0fe;
+      color: #1a4a9e;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 12px;
+      margin: 2px 2px 2px 0;
+      font-weight: 500;
+    }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .page-wrap {
+        grid-template-columns: 1fr;
+        padding: 24px 16px 60px;
+        gap: 24px;
+      }
+
+      .infobox {
+        position: static;
+        order: -1;
+      }
+
+      .article-title { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="topnav">
+    <a class="back-btn" href="index.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M19 12H5M12 5l-7 7 7 7"/>
+      </svg>
+      Christian Nguyens
+    </a>
+    <span class="nav-title">About Me</span>
+  </nav>
+
+  <div class="page-wrap">
+
+    <!-- MAIN ARTICLE -->
+    <article class="article">
+
+      <h1 class="article-title">Christian Nguyens</h1>
+      <div class="article-subtitle">Student · Aspiring Technologist · Rock Hill, SC</div>
+
+      <p class="lead">
+        <b>Christian Nguyens</b> is an incoming freshman at <a href="https://wustl.edu" target="_blank">Washington University in St. Louis</a>, 
+        where he will study Computer Science and Finance through the Joint <a href="https://bucs.wustl.edu" target="_blank">BUCS program</a>.<sup><a href="#ref1" id="cite1">[1]</a></sup> 
+        A senior from Rock Hill, South Carolina, he is passionate about the intersection of technology and business, 
+        with particular interest in fintech and big tech.
+      </p>
+
+      <p>
+        Initially, his high school goals aligned with engineering, but a newfound interest in finance and 
+        technology led him to explore the intersection between tech and business — ultimately leading him 
+        to WashU's Joint Business and Computer Science program.<sup><a href="#ref2" id="cite2">[2]</a></sup>
+      </p>
+
+      <h2>Background</h2>
+
+      <p>
+        Nguyens grew up in Rock Hill, SC, where he attended high school and developed an early interest 
+        in computers and problem-solving. Over time, this curiosity expanded into a broader fascination 
+        with how technology shapes financial systems and business strategy.
+      </p>
+
+      <p>
+        He hopes to work in fintech, big tech, or even start his own venture — fields where his dual 
+        expertise in CS and Finance would be most applicable.
+      </p>
+
+      <h2>Education</h2>
+
+      <h3>High School</h3>
+      <p>
+        Nguyens completed his secondary education in Rock Hill, South Carolina. During this period, 
+        he navigated the college application process independently, ultimately earning admission to 
+        Washington University in St. Louis — a top-15 university nationally.<sup><a href="#ref3" id="cite3">[3]</a></sup>
+      </p>
+
+      <h3>Washington University in St. Louis (2026–present)</h3>
+      <p>
+        Nguyens is set to begin his undergraduate studies in Fall 2026, pursuing a joint degree 
+        in Business and Computer Science. The BUCS program combines rigorous technical training 
+        with core business education, preparing graduates for leadership roles across industries.
+      </p>
+
+      <h2>Interests & Goals</h2>
+      <p>
+        His primary areas of interest include financial technology, software development, and 
+        entrepreneurship. He is particularly drawn to how software can transform financial 
+        infrastructure and make markets more accessible.
+      </p>
+
+      <!-- FOOTNOTES -->
+      <div class="footnotes">
+        <h2>References</h2>
+        <ol>
+          <li id="ref1">Washington University in St. Louis. <a href="https://bucs.wustl.edu" target="_blank">"Joint Business and Computer Science Program."</a> WashU. <a href="#cite1">↑</a></li>
+          <li id="ref2">Nguyens, Christian. Personal website, About Me section. 2026. <a href="#cite2">↑</a></li>
+          <li id="ref3">U.S. News & World Report. <a href="https://www.usnews.com/best-colleges/washington-university-in-st-louis-2520" target="_blank">"Washington University in St. Louis Rankings."</a> 2025. <a href="#cite3">↑</a></li>
+        </ol>
+      </div>
+
+    </article>
+
+    <!-- INFOBOX -->
+    <aside>
+      <div class="infobox">
+        <div class="infobox-header">Christian Nguyens</div>
+        <div class="infobox-photo">
+          <span class="infobox-initials">CN</span>
+        </div>
+        <div class="infobox-photo-caption">Rock Hill, South Carolina</div>
+        <table>
+          <tr>
+            <td>Born</td>
+            <td>Rock Hill, SC, USA</td>
+          </tr>
+          <tr>
+            <td>Education</td>
+            <td><a href="https://wustl.edu" target="_blank">Washington University in St. Louis</a> (2026–)</td>
+          </tr>
+          <tr>
+            <td>Degree</td>
+            <td>B.S. Computer Science &amp; Finance (BUCS)</td>
+          </tr>
+          <tr>
+            <td>Class</td>
+            <td>2030</td>
+          </tr>
+          <tr>
+            <td>From</td>
+            <td>Rock Hill, SC</td>
+          </tr>
+          <tr>
+            <td>Interests</td>
+            <td>
+              <span class="infobox-tag">Fintech</span>
+              <span class="infobox-tag">Big Tech</span>
+              <span class="infobox-tag">CS</span>
+              <span class="infobox-tag">Finance</span>
+              <span class="infobox-tag">Startups</span>
+            </td>
+          </tr>
+          <tr>
+            <td>Website</td>
+            <td><a href="index.html">christian.dev</a></td>
+          </tr>
+        </table>
+      </div>
+    </aside>
+
+  </div>
+
+</body>
+</html>

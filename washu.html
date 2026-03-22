@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="favicon-16x16.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta charset="UTF-8">
+  <title>Future + FAQ — Christian Nguyens</title>
+  <meta property="og:title" content="Christian Nguyens" />
+  <meta property="og:description" content="Incoming freshman @ WashU trying to break into CS and finance." />
+  <meta property="og:image" content="android-chrome-512x512.png" />
+  <meta property="og:url" content="https://christiannguyens.github.io/cnguyens/" />
+  <meta property="og:type" content="website" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #dae0e6;
+      --bg-card: #ffffff;
+      --bg-sidebar: #ffffff;
+      --border: #edeff1;
+      --text-primary: #1c1c1c;
+      --text-secondary: #576069;
+      --text-tertiary: #878a8c;
+      --orange: #ff4500;
+      --orange-light: #fff4f0;
+      --orange-hover: #e03d00;
+      --blue: #0079d3;
+      --blue-light: #e8f0fe;
+      --upvote: #ff4500;
+      --downvote: #7193ff;
+      --tag-bg: #e8f0fe;
+      --tag-text: #0079d3;
+      --font: 'IBM Plex Sans', sans-serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+    }
+
+    html, body { overflow-x: hidden; width: 100%; }
+
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: var(--font);
+      font-size: 14px;
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    .topnav {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 48px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .nav-left { display: flex; align-items: center; gap: 16px; }
+
+    .reddit-logo {
+      display: flex; align-items: center; gap: 8px;
+      text-decoration: none;
+      font-weight: 700; font-size: 16px;
+      color: var(--text-primary);
+    }
+
+    .reddit-icon {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--orange);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 18px; flex-shrink: 0;
+    }
+
+    .nav-search {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 20px; padding: 6px 14px;
+      font-size: 14px; color: var(--text-tertiary);
+      width: 220px; cursor: text;
+    }
+
+    .nav-right { display: flex; align-items: center; gap: 10px; }
+
+    .nav-btn {
+      padding: 5px 14px; border-radius: 20px;
+      font-size: 13px; font-weight: 700;
+      cursor: pointer; font-family: var(--font);
+      text-decoration: none; display: inline-block;
+      transition: background 0.15s;
+    }
+
+    .nav-btn-outline {
+      border: 1px solid var(--orange); color: var(--orange); background: transparent;
+    }
+    .nav-btn-outline:hover { background: var(--orange-light); }
+
+    .nav-btn-fill {
+      background: var(--orange); color: white; border: 1px solid var(--orange);
+    }
+    .nav-btn-fill:hover { background: var(--orange-hover); }
+
+    /* SUBREDDIT BANNER */
+    .subreddit-banner {
+      background: linear-gradient(135deg, #ff4500 0%, #ff6534 50%, #ff8717 100%);
+      height: 64px;
+    }
+
+    .subreddit-header {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 0 20px;
+    }
+
+    .subreddit-header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-end;
+      gap: 16px;
+      padding: 12px 0;
+    }
+
+    .subreddit-icon {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: var(--orange);
+      border: 4px solid white;
+      margin-top: -32px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; flex-shrink: 0;
+    }
+
+    .subreddit-info { flex: 1; }
+
+    .subreddit-name {
+      font-size: 22px; font-weight: 700; color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    .subreddit-handle {
+      font-size: 13px; color: var(--text-tertiary);
+    }
+
+    .join-btn {
+      padding: 6px 18px; border-radius: 20px;
+      background: var(--blue); color: white;
+      font-size: 14px; font-weight: 700;
+      border: none; cursor: pointer; font-family: var(--font);
+      flex-shrink: 0; margin-bottom: 4px;
+      transition: background 0.15s;
+    }
+    .join-btn:hover { background: #006dbf; }
+
+    /* LAYOUT */
+    .page-wrap {
+      max-width: 1100px;
+      margin: 20px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 1fr 312px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    /* POST CARD */
+    .post-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: border-color 0.15s;
+    }
+    .post-card:hover { border-color: #818384; }
+
+    .post-inner {
+      display: flex;
+      gap: 0;
+    }
+
+    /* VOTE COLUMN */
+    .vote-col {
+      background: #f8f9fa;
+      padding: 8px 4px;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 4px;
+      min-width: 40px;
+    }
+
+    .vote-btn {
+      background: none; border: none; cursor: pointer;
+      color: var(--text-tertiary); padding: 4px;
+      border-radius: 2px; font-size: 16px; line-height: 1;
+      transition: color 0.1s, background 0.1s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .vote-btn:hover { color: var(--upvote); background: #f0e8e6; }
+    .vote-btn.down:hover { color: var(--downvote); background: #e8ecf0; }
+
+    .vote-count {
+      font-size: 12px; font-weight: 700;
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+    }
+
+    /* POST CONTENT */
+    .post-content { padding: 8px 8px 8px 0; flex: 1; min-width: 0; }
+
+    .post-meta {
+      font-size: 12px; color: var(--text-tertiary);
+      margin-bottom: 8px; display: flex; align-items: center; gap: 4px; flex-wrap: wrap;
+    }
+
+    .post-meta .subreddit-tag {
+      font-weight: 700; color: var(--text-primary);
+    }
+
+    .post-meta .dot { color: var(--text-tertiary); }
+
+    .post-title {
+      font-size: 18px; font-weight: 600;
+      color: var(--text-primary); margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .post-flair {
+      display: inline-block;
+      background: var(--orange-light); color: var(--orange);
+      font-size: 12px; font-weight: 600;
+      padding: 2px 8px; border-radius: 12px;
+      margin-bottom: 10px;
+    }
+
+    .post-body {
+      font-size: 14px; color: var(--text-primary);
+      line-height: 1.7; margin-bottom: 10px;
+      border-left: 3px solid var(--border);
+      padding-left: 12px;
+    }
+
+    .post-actions {
+      display: flex; align-items: center; gap: 4px; flex-wrap: wrap;
+    }
+
+    .post-action-btn {
+      display: flex; align-items: center; gap: 5px;
+      padding: 6px 8px; border-radius: 2px;
+      font-size: 12px; font-weight: 700; color: var(--text-tertiary);
+      background: none; border: none; cursor: pointer; font-family: var(--font);
+      transition: background 0.1s, color 0.1s;
+    }
+    .post-action-btn:hover { background: var(--bg); color: var(--text-primary); }
+
+    /* COMMENT SECTION */
+    .comment-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      margin-bottom: 10px;
+      padding: 16px;
+    }
+
+    .comment-sort {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 16px; padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px; color: var(--text-tertiary);
+      font-weight: 600;
+    }
+
+    .sort-option {
+      padding: 4px 8px; border-radius: 2px; cursor: pointer;
+      transition: background 0.1s;
+    }
+    .sort-option:hover { background: var(--bg); }
+    .sort-option.active { color: var(--blue); }
+
+    /* COMMENT */
+    .comment {
+      margin-bottom: 20px;
+      padding-left: 0;
+    }
+
+    .comment:last-child { margin-bottom: 0; }
+
+    .comment-thread {
+      border-left: 2px solid var(--border);
+      margin-left: 8px;
+      padding-left: 12px;
+      margin-top: 10px;
+    }
+
+    .comment-thread:hover { border-left-color: #818384; }
+
+    .comment-header {
+      display: flex; align-items: center; gap: 6px;
+      margin-bottom: 6px; flex-wrap: wrap;
+    }
+
+    .comment-avatar {
+      width: 24px; height: 24px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; color: white; flex-shrink: 0;
+    }
+
+    .comment-author {
+      font-size: 12px; font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .comment-author.op { color: var(--blue); }
+    .comment-author.op::after {
+      content: ' OP';
+      font-size: 10px; font-weight: 700;
+      background: var(--blue); color: white;
+      padding: 1px 5px; border-radius: 3px;
+      margin-left: 4px;
+    }
+
+    .comment-badge {
+      font-size: 10px; font-weight: 700;
+      background: var(--orange); color: white;
+      padding: 1px 6px; border-radius: 3px;
+    }
+
+    .comment-time {
+      font-size: 12px; color: var(--text-tertiary);
+    }
+
+    .comment-body {
+      font-size: 14px; color: var(--text-primary);
+      line-height: 1.7; margin-bottom: 8px;
+    }
+
+    .comment-body a {
+      color: var(--blue); text-decoration: none;
+    }
+    .comment-body a:hover { text-decoration: underline; }
+
+    .comment-body .numbered {
+      margin: 6px 0 6px 16px;
+    }
+
+    .comment-actions {
+      display: flex; align-items: center; gap: 4px;
+    }
+
+    .comment-vote {
+      display: flex; align-items: center; gap: 4px;
+      margin-right: 6px;
+    }
+
+    .cvote-btn {
+      background: none; border: none; cursor: pointer;
+      color: var(--text-tertiary); font-size: 14px; padding: 2px 4px;
+      border-radius: 2px; transition: color 0.1s;
+      display: flex; align-items: center;
+    }
+    .cvote-btn:hover { color: var(--upvote); }
+    .cvote-btn.down:hover { color: var(--downvote); }
+
+    .cvote-count {
+      font-size: 12px; font-weight: 700;
+      color: var(--text-primary); font-family: var(--font-mono);
+    }
+
+    .comment-action-btn {
+      padding: 4px 6px; border-radius: 2px;
+      font-size: 12px; font-weight: 700; color: var(--text-tertiary);
+      background: none; border: none; cursor: pointer; font-family: var(--font);
+      transition: background 0.1s, color 0.1s;
+    }
+    .comment-action-btn:hover { background: var(--bg); color: var(--text-primary); }
+
+    /* SIDEBAR */
+    .sidebar-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 4px; margin-bottom: 10px; overflow: hidden;
+    }
+
+    .sidebar-banner {
+      height: 48px;
+      background: linear-gradient(135deg, #ff4500, #ff8717);
+    }
+
+    .sidebar-body { padding: 12px; }
+
+    .sidebar-title {
+      font-size: 14px; font-weight: 700;
+      color: var(--text-primary); margin-bottom: 8px;
+    }
+
+    .sidebar-desc {
+      font-size: 13px; color: var(--text-secondary);
+      line-height: 1.6; margin-bottom: 12px;
+    }
+
+    .sidebar-divider {
+      border: none; border-top: 1px solid var(--border); margin: 12px 0;
+    }
+
+    .sidebar-stat-row {
+      display: flex; justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .sidebar-stat { text-align: center; }
+    .sidebar-stat-num { font-size: 16px; font-weight: 700; color: var(--text-primary); }
+    .sidebar-stat-label { font-size: 11px; color: var(--text-tertiary); }
+
+    .sidebar-create-btn {
+      display: block; width: 100%;
+      padding: 8px; border-radius: 20px;
+      background: var(--orange); color: white;
+      font-size: 14px; font-weight: 700; text-align: center;
+      text-decoration: none; border: none; cursor: pointer;
+      font-family: var(--font); transition: background 0.15s;
+      margin-bottom: 8px;
+    }
+    .sidebar-create-btn:hover { background: var(--orange-hover); }
+
+    .sidebar-outline-btn {
+      display: block; width: 100%;
+      padding: 7px; border-radius: 20px;
+      background: transparent; color: var(--blue);
+      font-size: 14px; font-weight: 700; text-align: center;
+      text-decoration: none; border: 1px solid var(--blue);
+      cursor: pointer; font-family: var(--font); transition: background 0.15s;
+    }
+    .sidebar-outline-btn:hover { background: var(--blue-light); }
+
+    .community-rules { list-style: none; }
+
+    .rule-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 8px 0; border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+    .rule-item:last-child { border-bottom: none; }
+
+    .rule-num {
+      font-weight: 700; color: var(--text-secondary);
+      min-width: 16px; flex-shrink: 0;
+    }
+
+    .rule-text { color: var(--text-primary); font-weight: 500; }
+
+    .sidebar-links { display: flex; flex-direction: column; gap: 8px; }
+
+    .sidebar-link {
+      display: flex; align-items: center; gap: 8px;
+      color: var(--blue); text-decoration: none;
+      font-size: 13px; font-weight: 500;
+      padding: 6px 8px; border-radius: 4px;
+      transition: background 0.1s;
+    }
+    .sidebar-link:hover { background: var(--bg); text-decoration: underline; }
+
+    /* FOOTER */
+    footer {
+      text-align: center; padding: 24px;
+      font-size: 12px; color: var(--text-tertiary);
+      border-top: 1px solid var(--border); margin-top: 12px;
+    }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .page-wrap { grid-template-columns: 1fr; padding: 0 10px; margin: 10px auto; gap: 10px; }
+      .nav-search { display: none; }
+      .nav-right { gap: 6px; }
+      .subreddit-header-inner { flex-wrap: wrap; }
+      .subreddit-name { font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- REDDIT NAV -->
+  <nav class="topnav">
+    <div class="nav-left">
+      <a class="reddit-logo" href="index.html">
+        <div class="reddit-icon">👽</div>
+        <span>christiannguyens</span>
+      </a>
+      <div class="nav-search">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Search r/christiannguyens
+      </div>
+    </div>
+    <div class="nav-right">
+      <a class="nav-btn nav-btn-outline" href="index.html">← Back</a>
+      <a class="nav-btn nav-btn-fill" href="people.html">Log In</a>
+    </div>
+  </nav>
+
+  <!-- SUBREDDIT HEADER -->
+  <div class="subreddit-banner"></div>
+  <div class="subreddit-header">
+    <div class="subreddit-header-inner">
+      <div class="subreddit-icon">👽</div>
+      <div class="subreddit-info">
+        <div class="subreddit-name">r/christiannguyens</div>
+        <div class="subreddit-handle">u/christiannguyens · Future + FAQ</div>
+      </div>
+      <button class="join-btn">Join</button>
+    </div>
+  </div>
+
+  <div class="page-wrap">
+    <main>
+
+      <!-- OP POST -->
+      <div class="post-card">
+        <div class="post-inner">
+          <div class="vote-col">
+            <button class="vote-btn" onclick="vote(this, 'up')">▲</button>
+            <span class="vote-count" id="post-votes">847</span>
+            <button class="vote-btn down" onclick="vote(this, 'down')">▼</button>
+          </div>
+          <div class="post-content">
+            <div class="post-meta">
+              <span class="subreddit-tag">r/christiannguyens</span>
+              <span class="dot">•</span>
+              Posted by
+              <span style="color:var(--blue);font-weight:700;">u/christiannguyens</span>
+              <span class="dot">•</span>
+              3 hours ago
+            </div>
+            <div class="post-flair">📌 AMA — Ask Me Anything</div>
+            <div class="post-title">what am i doing now? what will my future entail? and questions about that</div>
+            <div class="post-body">
+              Hey r/christiannguyens — figured I'd do an AMA since people keep asking me stuff. I'm a senior in high school from Rock Hill, SC, heading to Washington University in St. Louis (WashU) this fall for CS + Finance through the BUCS program. Ask me anything about my plans, why I picked WashU, what I'm like as a person, or whatever else. I'll answer everything below.
+            </div>
+            <div class="post-actions">
+              <button class="post-action-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                9 Comments
+              </button>
+              <button class="post-action-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+                Share
+              </button>
+              <button class="post-action-btn">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COMMENTS -->
+      <div class="comment-section">
+
+        <div class="comment-sort">
+          Sort by:
+          <span class="sort-option active">Best</span>
+          <span class="sort-option">Top</span>
+          <span class="sort-option">New</span>
+          <span class="sort-option">Controversial</span>
+        </div>
+
+        <!-- Q1 -->
+        <div class="comment">
+          <div class="comment-header">
+            <div class="comment-avatar" style="background:#ff6314;">u1</div>
+            <span class="comment-author">u/curious_redditor_92</span>
+            <span class="comment-time">2h ago</span>
+            <span class="comment-badge">Top Comment</span>
+          </div>
+          <div class="comment-body">what is your current goal?</div>
+          <div class="comment-actions">
+            <div class="comment-vote">
+              <button class="cvote-btn">▲</button>
+              <span class="cvote-count">312</span>
+              <button class="cvote-btn down">▼</button>
+            </div>
+            <button class="comment-action-btn">Reply</button>
+            <button class="comment-action-btn">Share</button>
+          </div>
+          <div class="comment-thread">
+            <div class="comment-header">
+              <div class="comment-avatar" style="background:#ff4500;">CN</div>
+              <span class="comment-author op">u/christiannguyens</span>
+              <span class="comment-time">2h ago</span>
+            </div>
+            <div class="comment-body">cruise thru my last semester of high school and graduate with good enough grades.</div>
+            <div class="comment-actions">
+              <div class="comment-vote">
+                <button class="cvote-btn">▲</button>
+                <span class="cvote-count">289</span>
+                <button class="cvote-btn down">▼</button>
+              </div>
+              <button class="comment-action-btn">Reply</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="comment">
+          <div class="comment-header">
+            <div class="comment-avatar" style="background:#7193ff;">wz</div>
+            <span class="comment-author">u/WashUconfused</span>
+            <span class="comment-time">2h ago</span>
+          </div>
+          <div class="comment-body">i thought washu was in seattle?</div>
+          <div class="comment-actions">
+            <div class="comment-vote">
+              <button class="cvote-btn">▲</button>
+              <span class="cvote-count">204</span>
+              <button class="cvote-btn down">▼</button>
+            </div>
+            <button class="comment-action-btn">Reply</button>
+            <button class="comment-action-btn">Share</button>
+          </div>
+          <div class="comment-thread">
+            <div class="comment-header">
+              <div class="comment-avatar" style="background:#ff4500;">CN</div>
+              <span class="comment-author op">u/christiannguyens</span>
+              <span class="comment-time">2h ago</span>
+            </div>
+            <div class="comment-body">WashU is located in St. Louis, Missouri (the city with the big arch). It's often mistaken with UW (University of Washington) in Seattle. They are separate entities — WashU is not a satellite campus.</div>
+            <div class="comment-actions">
+              <div class="comment-vote">
+                <button class="cvote-btn">▲</button>
+                <span class="cvote-count">198</span>
+                <button class="cvote-btn down">▼</button>
+              </div>
+              <button class="comment-action-btn">Reply</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="comment">
+          <div class="comment-header">
+            <div class="comment-avatar" style="background:#34a853;">gk</div>
+            <span class="comment-author">u/collegekid2026</span>
+            <span class="comment-time">1h ago</span>
+          </div>
+          <div class="comment-body">why washu?</div>
+          <div class="comment-actions">
+            <div class="comment-vote">
+              <button class="cvote-btn">▲</button>
+              <span class="cvote-count">178</span>
+              <button class="cvote-btn down">▼</button>
+            </div>
+            <button class="comment-action-btn">Reply</button>
+            <button class="comment-action-btn">Share</button>
+          </div>
+          <div class="comment-thread">
+            <div class="comment-header">
+              <div class="comment-avatar" style="background:#ff4500;">CN</div>
+              <span class="comment-author op">u/christiannguyens</span>
+              <span class="comment-time">1h ago</span>
+            </div>
+            <div class="comment-body">
+              3 things:
+              <div class="numbered">1. The <a href="https://sites.wustl.edu/businesspluscs/" target="_blank">BUCS program</a>, which combines business and comp sci</div>
+              <div class="numbered">2. The college emphasizes hard work and collaboration</div>
+              <div class="numbered">3. It's a top 20 and its early/binding decision application gave me the highest boost — the regular acceptance rate is ~10%</div>
+            </div>
+            <div class="comment-actions">
+              <div class="comment-vote">
+                <button class="cvote-btn">▲</button>
+                <span class="cvote-count">165</span>
+                <button class="cvote-btn down">▼</button>
+              </div>
+              <button class="comment-action-btn">Reply</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="comment">
+          <div class="comment-header">
+            <div class="comment-avatar" style="background:#fbbc05;">gt</div>
+            <span class="comment-author">u/GTechFan</span>
+            <span class="comment-time">1h ago</span>
+          </div>
+          <div class="comment-body">what happened to trying to get into georgia tech?</div>
+          <div class="comment-actions">
+            <div class="comment-vote">
+              <button class="cvote-btn">▲</button>
+              <span class="cvote-count">143</span>
+              <button class="cvote-btn down">▼</button>
+            </div>
+            <button class="comment-action-btn">Reply</button>
+            <button class="comment-action-btn">Share</button>
+          </div>
+          <div class="comment-thread">
+            <div class="comment-header">
+              <div class="comment-avatar" style="background:#ff4500;">CN</div>
+              <span class="comment-author op">u/christiannguyens</span>
+              <span class="comment-time">1h ago</span>
+            </div>
+            <div class="comment-body">
+              3 things:
+              <div class="numbered">1. I don't wanna do engineering anymore</div>
+              <div class="numbered">2. I'm not getting into any of their STEM majors</div>
+              <div class="numbered">3. It's out of state and public, which meant my financial aid would be abysmal</div>
+            </div>
+            <div class="comment-actions">
+              <div class="comment-vote">
+                <button class="cvote-btn">▲</button>
+                <span class="cvote-count">131</span>
+                <button class="cvote-btn down">▼</button>
+              </div>
+              <button class="comment-action-btn">Reply</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="comment">
+          <div class="comment-header">
+            <div class="comment-avatar" style="background:#0a66c2;">ms</div>
+            <span class="comment-author">u/majorswitch_throwaway</span>
+            <span class="comment-time">58m ago</span>
+          </div>
+          <div class="comment-body">why the major switch?</div>
+          <div class="comment-actions">
+            <div class="comment-vote">
+              <button class="cvote-btn">▲</button>
+              <span class="cvote-count">119</span>
+              <button class="cvote-btn down">▼</button>
+            </div>
+            <button class="comment-action-btn">Reply</button>
+            <button class="comment-action-btn">Share</button>
+          </div>
+          <div class="comment-thread">
+            <div class="comment-header">
+              <div class="comment-avatar" style="background:#ff4500;">CN</div>
+              <span class="comment-author op">u/christiannguyens</span>
+              <span class="comment-time">55m ago</span>
+            </div>
+            <div class="comment-body">I did not like AP physics or science in general (ironic since I'm doing computer SCIENCE). I was more interested in the systems aspect — making intertwined things more efficient.</div>
+            <div class="comment-actions">
+              <div class="comment-vote">
+                <button class="cvote-btn">▲</button>
+                <span class="cvote-count">108</span>
+                <button class="cvote-btn down">▼</button>
+              </div>
+              <button class="comment-action-btn">Reply</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="comment">
+          <div class="comment-header">
+            <div class="comment-avatar" style="background:#e53935;">fp</div>
+            <span class="comment-author">u/futureplans_guy</span>
+            <span class="comment-time">45m ago</span>
+          </div>
+          <div class="comment-body">what do u want to do in the future?</div>
+          <div class="comment-actions">
+            <div class="comment-vote">
+              <button class="cvote-btn">▲</button>
+              <span class="cvote-count">97</span>
+              <button class="cvote-btn down">▼</button>
+            </div>
+            <button class="comment-action-btn">Reply</button>
+            <button class="comment-action-btn">Share</button>
+          </div>
+          <div class="comment-thread">
+            <div class="comment-header">
+              <div class="comment-avatar" style="background:#ff4500;">CN</div>
+              <span class="comment-author op">u/christiannguyens</span>
+              <span class="comment-time">42m ago</span>
+            </div>
+            <div class="comment-body">In college, I want to go to hackathons, join clubs, create a startup, and maybe even pursue research! The ultimate goal is to land internships and a job out of college.</div>
+            <div class="comment-actions">
+              <div class="comment-vote">
+                <button class="cvote-btn">▲</button>
+                <span class="cvote-count">89</span>
+                <button class="cvote-btn down">▼</button>
+              </div>
+              <button class="comment-action-btn">Reply</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="comment">
+          <div class="comment-header">
+            <div class="comment-avatar" style="background:#9c27b0;">pp</div>
+            <span class="comment-author">u/personalityquestions</span>
+            <span class="comment-time">30m ago</span>
+          </div>
+          <div class="comment-body">how are you as a person?</div>
+          <div class="comment-actions">
+            <div class="comment-vote">
+              <button class="cvote-btn">▲</button>
+              <span class="cvote-count">76</span>
+              <button class="cvote-btn down">▼</button>
+            </div>
+            <button class="comment-action-btn">Reply</button>
+            <button class="comment-action-btn">Share</button>
+          </div>
+          <div class="comment-thread">
+            <div class="comment-header">
+              <div class="comment-avatar" style="background:#ff4500;">CN</div>
+              <span class="comment-author op">u/christiannguyens</span>
+              <span class="comment-time">28m ago</span>
+            </div>
+            <div class="comment-body">
+              I am very introverted, although I do open up around people who share commonalities with me. My MBTI is ISTP, and 3 words to describe me are:
+              <div class="numbered">1. zesty</div>
+              <div class="numbered">2. curious</div>
+              <div class="numbered">3. niche</div>
+            </div>
+            <div class="comment-actions">
+              <div class="comment-vote">
+                <button class="cvote-btn">▲</button>
+                <span class="cvote-count">71</span>
+                <button class="cvote-btn down">▼</button>
+              </div>
+              <button class="comment-action-btn">Reply</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q8 -->
+        <div class="comment">
+          <div class="comment-header">
+            <div class="comment-avatar" style="background:#00897b;">hl</div>
+            <span class="comment-author">u/hobbies_lurker</span>
+            <span class="comment-time">15m ago</span>
+          </div>
+          <div class="comment-body">outside of school, what do you do?</div>
+          <div class="comment-actions">
+            <div class="comment-vote">
+              <button class="cvote-btn">▲</button>
+              <span class="cvote-count">54</span>
+              <button class="cvote-btn down">▼</button>
+            </div>
+            <button class="comment-action-btn">Reply</button>
+            <button class="comment-action-btn">Share</button>
+          </div>
+          <div class="comment-thread">
+            <div class="comment-header">
+              <div class="comment-avatar" style="background:#ff4500;">CN</div>
+              <span class="comment-author op">u/christiannguyens</span>
+              <span class="comment-time">12m ago</span>
+            </div>
+            <div class="comment-body">I like listening to music (my taste is niche), playing TFT with my friends, doomscrolling Instagram and TikTok, and snacking. I live a very boring life, and I hope that WashU gives me the opportunity to grow and have fun. I want to live a life beyond a screen.</div>
+            <div class="comment-actions">
+              <div class="comment-vote">
+                <button class="cvote-btn">▲</button>
+                <span class="cvote-count">49</span>
+                <button class="cvote-btn down">▼</button>
+              </div>
+              <button class="comment-action-btn">Reply</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- SIDEBAR -->
+    <aside>
+
+      <div class="sidebar-card">
+        <div class="sidebar-banner"></div>
+        <div class="sidebar-body">
+          <div class="sidebar-title">r/christiannguyens</div>
+          <div class="sidebar-desc">The personal subreddit of Christian Nguyens — incoming WashU BUCS freshman, aspiring fintech/big tech professional, and chronic doomscroller. Ask me anything.</div>
+          <hr class="sidebar-divider">
+          <div class="sidebar-stat-row">
+            <div class="sidebar-stat">
+              <div class="sidebar-stat-num">847</div>
+              <div class="sidebar-stat-label">Members</div>
+            </div>
+            <div class="sidebar-stat">
+              <div class="sidebar-stat-num">12</div>
+              <div class="sidebar-stat-label">Online</div>
+            </div>
+            <div class="sidebar-stat">
+              <div class="sidebar-stat-num">2026</div>
+              <div class="sidebar-stat-label">Founded</div>
+            </div>
+          </div>
+          <hr class="sidebar-divider">
+          <a class="sidebar-create-btn" href="contact.html">Create Post</a>
+          <a class="sidebar-outline-btn" href="contact.html">Contact Me</a>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-body">
+          <div class="sidebar-title">r/christiannguyens Rules</div>
+          <ul class="community-rules">
+            <li class="rule-item"><span class="rule-num">1.</span><span class="rule-text">Be respectful and civil</span></li>
+            <li class="rule-item"><span class="rule-num">2.</span><span class="rule-text">No spam or self-promotion</span></li>
+            <li class="rule-item"><span class="rule-num">3.</span><span class="rule-text">Keep questions genuine</span></li>
+            <li class="rule-item"><span class="rule-num">4.</span><span class="rule-text">No recruiting without permission</span></li>
+            <li class="rule-item"><span class="rule-num">5.</span><span class="rule-text">Good vibes only</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-body">
+          <div class="sidebar-title">Other Pages</div>
+          <div class="sidebar-links">
+            <a class="sidebar-link" href="about.html">→ About Me</a>
+            <a class="sidebar-link" href="projects.html">→ Projects</a>
+            <a class="sidebar-link" href="college.html">→ College Application</a>
+            <a class="sidebar-link" href="links.html">→ Links</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-body" style="font-size:11px;color:var(--text-tertiary);line-height:1.8;">
+          r/christiannguyens · Made by Christian Nguyens<br>
+          Rock Hill, SC · WashU BUCS '30<br>
+          <a href="index.html" style="color:var(--blue);">christiannguyens.github.io</a>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+
+  <footer>Made by Christian Nguyens · Rock Hill, SC · WashU BUCS '30</footer>
+
+  <script>
+    function vote(btn, dir) {
+      const col = btn.closest('.vote-col');
+      const countEl = col.querySelector('.vote-count');
+      let count = parseInt(countEl.textContent);
+      if (dir === 'up') {
+        countEl.textContent = count + 1;
+        btn.style.color = '#ff4500';
+      } else {
+        countEl.textContent = count - 1;
+        btn.style.color = '#7193ff';
+      }
+    }
+
+    document.querySelectorAll('.sort-option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        document.querySelectorAll('.sort-option').forEach(o => o.classList.remove('active'));
+        opt.classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+</html>
