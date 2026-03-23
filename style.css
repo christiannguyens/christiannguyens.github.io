@@ -2,9 +2,9 @@
 body {
     background: #0d0d0d;
     color: #e6e6e6;
-    font-family: 'Roboto', Arial, sans-serif;
+    font-family: "Georgia", serif;
     margin: 0;
-    font-size: 24px;
+    font-size: 34px;
     line-height: 1.5;
     overflow-x:hidden;
     width: 100%;
@@ -12,9 +12,9 @@ body {
 
 /* MAIN CONTENT */
 .content {
-    margin-left: 40px;
+    margin-left: 400px;
     margin-right: 40px;
-    padding: 40px;
+    padding: 0px;
     flex: 1;
     color:#e6e0e0
 }
@@ -83,10 +83,10 @@ footer {
     padding-top: 22px;
     padding-bottom: 22px;
     padding-right: 42px; /* <-- add this */
-    color: #555;
+    color: #ffffff;
     font-size: 16px;
     text-align: right;
-    border-top: 1px solid #222;
+    border-top: transparent;
 }
 
 #clock {
@@ -154,7 +154,10 @@ footer {
 @media (min-width: 1400px) {
     .content {
         margin-right: 100px;
+        margin-left: 700px;
+        margin-top: 100px;
         max-width: 1100px;
+        font-size: larger;
     }
 }
 
